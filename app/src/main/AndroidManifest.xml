@@ -10,13 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bounce">
         <activity
-            android:name=".SignInPage"
+            android:name=".FeedbackMain"
             android:exported="true" />
         <activity
-            android:name=".HomePage"
-            android:exported="true" />
-        <activity
-            android:name=".LoadingPage"
+            android:name=".ReviewMainPage"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
