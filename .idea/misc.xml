@@ -3,11 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/layout/activity_feedback_main.xml" value="0.22507237492775267" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.10060395450395221" />
-        <entry key="app/src/main/res/layout/activity_review_main_page.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_review_response.xml" value="0.11980749746707194" />
-        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.3037813595502019" />
+        <entry key="app/src/main/res/layout/activity_feedback_main.xml" value="0.25226449275362317" />
+        <entry key="app/src/main/res/layout/activity_home_page.xml" value="0.18432971014492755" />
+        <entry key="app/src/main/res/layout/activity_loading_page.xml" value="0.15526849037487336" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25226449275362317" />
+        <entry key="app/src/main/res/layout/activity_main_page.xml" value="0.25226449275362317" />
+        <entry key="app/src/main/res/layout/activity_patron_onboarding.xml" value="0.16621376811594202" />
+        <entry key="app/src/main/res/layout/activity_sign_in_page.xml" value="0.2782111161163632" />
+        <entry key="app/src/main/res/layout/content_main_page.xml" value="0.25226449275362317" />
+        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.25226449275362317" />
+        <entry key="app/src/main/res/layout/fragment_second.xml" value="0.25226449275362317" />
+        <entry key="app/src/main/res/layout/patron_onboarding.xml" value="0.1475734565863321" />
       </map>
     </option>
   </component>
