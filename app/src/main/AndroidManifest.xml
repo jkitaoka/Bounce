@@ -10,9 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bounce">
         <activity
-            android:name=".PatronOnboarding"
-            android:exported="true" />
-        <activity
             android:name=".FeedbackMain"
             android:exported="true" />
         <activity
