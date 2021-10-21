@@ -10,6 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bounce">
         <activity
+            android:name=".PostStatus"
+            android:exported="true" />
+        <activity
+            android:name=".StatusIndividual"
+            android:exported="true" />
+        <activity
+            android:name=".BarOnboarding"
+            android:exported="true" />
+        <activity
+            android:name=".FeedbackMain"
+            android:exported="true" />
+        <activity
+            android:name=".ReviewMainPage"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
