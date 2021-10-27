@@ -6,70 +6,75 @@
     android:layout_height="match_parent"
     tools:context=".BarOnboarding">
 
+
     <TextView
-            android:id="@+id/createBarAccount"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Create Bar Account"
-            android:textSize="39sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.081" />
+        android:id="@+id/createBarAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create Bar Account"
+        android:textSize="39sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.147" />
 
     <EditText
-            android:id="@+id/enterBarName"
-            android:layout_width="300sp"
-            android:layout_height="wrap_content"
-            android:hint="Bar Name"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.229" />
+        android:id="@+id/enterBarName"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:hint="Bar Name"
+        android:singleLine="true"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.285" />
 
-        <EditText
-            android:id="@+id/enterBarAddress"
-            android:layout_width="300sp"
-            android:layout_height="wrap_content"
-            android:hint="Bar Address"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.349" />
+    <EditText
+        android:id="@+id/enterBarAddress"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:hint="Bar Address"
+        android:singleLine="true"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.405" />
 
-        <EditText
-            android:id="@+id/enterEmail"
-            android:layout_width="300sp"
-            android:layout_height="wrap_content"
-            android:hint="Email Address"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.467" />
+    <EditText
+        android:id="@+id/enterEmail"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:hint="Email Address"
+        android:singleLine="true"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.522" />
 
-        <EditText
-            android:id="@+id/enterPassword"
-            android:layout_width="300sp"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.592" />
-
+    <EditText
+        android:id="@+id/enterPassword"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:singleLine="true"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.629" />
 
     <Button
         android:id="@+id/createAccountButton"
@@ -97,5 +102,18 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.734" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#3875A5"
+        android:onClick="backClicked"
+        android:text="back"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

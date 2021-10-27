@@ -3,15 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Creative Cloud Files/Classes/CS 407/Bounce/app/src/main/res/layout/activity_bar_info.xml" value="0.3333333333333333" />
-        <entry key="app/src/main/res/layout/activity_feedback_main.xml" value="0.22507237492775267" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.10060395450395221" />
-        <entry key="app/src/main/res/layout/activity_post_status.xml" value="0.2441123188405797" />
-        <entry key="app/src/main/res/layout/activity_review_main_page.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_review_response.xml" value="0.11980749746707194" />
-        <entry key="app/src/main/res/layout/activity_status_individual.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/activity_status_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.3037813595502019" />
+        <entry key="app/src/main/res/layout/activity_feedback_main.xml" value="0.25226449275362317" />
+        <entry key="app/src/main/res/layout/activity_home_page.xml" value="0.18432971014492755" />
+        <entry key="app/src/main/res/layout/activity_loading_page.xml" value="0.15526849037487336" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25226449275362317" />
+        <entry key="app/src/main/res/layout/activity_main_page.xml" value="0.25226449275362317" />
+        <entry key="app/src/main/res/layout/activity_patron_onboarding.xml" value="0.16621376811594202" />
+        <entry key="app/src/main/res/layout/activity_post_status.xml" value="0.16979166666666667" />
+        <entry key="app/src/main/res/layout/activity_sign_in_page.xml" value="0.2782111161163632" />
+        <entry key="app/src/main/res/layout/activity_status_main.xml" value="0.16979166666666667" />
+        <entry key="app/src/main/res/layout/bar_onboarding.xml" value="0.1375" />
+        <entry key="app/src/main/res/layout/content_main_page.xml" value="0.25226449275362317" />
+        <entry key="app/src/main/res/layout/fragment_first.xml" value="0.25226449275362317" />
+        <entry key="app/src/main/res/layout/fragment_second.xml" value="0.25226449275362317" />
+        <entry key="app/src/main/res/layout/loading_page.xml" value="0.12952898550724637" />
+        <entry key="app/src/main/res/layout/patron_onboarding.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/sign_in_page.xml" value="0.1" />
       </map>
     </option>
   </component>

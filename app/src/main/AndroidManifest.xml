@@ -10,13 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bounce">
         <activity
+            android:name=".BarOnboarding"
+            android:exported="true" />
+        <activity
+            android:name=".PatronOnboarding"
+            android:exported="true" />
+        <activity
+            android:name=".SignInPage"
+            android:exported="true" />
+        <activity
             android:name=".PostStatus"
             android:exported="true" />
         <activity
             android:name=".StatusIndividual"
-            android:exported="true" />
-        <activity
-            android:name=".BarOnboarding"
             android:exported="true" />
         <activity
             android:name=".FeedbackMain"
@@ -25,7 +31,7 @@
             android:name=".ReviewMainPage"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".LoadingPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
