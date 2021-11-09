@@ -13,6 +13,12 @@ public class BarOnboarding extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void createClicked(View view) {
+        Intent intent = new Intent(this, BarSideMain.class);
+        startActivity(intent);
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

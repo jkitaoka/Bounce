@@ -38,14 +38,9 @@ public class BarSideMain extends AppCompatActivity {
         startActivity(intent);
     }
 
-
-
     public void goToFeedbackMain(View view) {
         Intent intent = new Intent(this, FeedbackMain.class);
         startActivity(intent);
     }
-
-
-
 
 }

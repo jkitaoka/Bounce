@@ -83,6 +83,7 @@
         android:backgroundTint="#3875A5"
         android:text="Create Account"
         android:textColor="@color/black"
+        android:onClick="createClicked"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
