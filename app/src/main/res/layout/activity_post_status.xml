@@ -11,7 +11,7 @@
         android:layout_width="135dp"
         android:layout_height="55dp"
         android:text="Post"
-
+        android:onClick="postStatus"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.851"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -30,7 +30,9 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.975" />
+        app:layout_constraintVertical_bias="0.975"
+        android:onClick="goToStatusMain"
+        />
 
 
     <TextView

@@ -2,7 +2,9 @@ package com.example.bounce;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 public class PostStatus extends AppCompatActivity {
 
@@ -11,4 +13,17 @@ public class PostStatus extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_status);
     }
+
+    public void goToStatusMain(View view) {
+        Intent intent = new Intent(this, statusMain.class);
+        startActivity(intent);
+    }
+
+
+    public void postStatus(View view) {
+        goToStatusMain(view);
+    }
+
+
+
 }

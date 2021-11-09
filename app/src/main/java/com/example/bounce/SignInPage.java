@@ -42,6 +42,8 @@ public class SignInPage extends AppCompatActivity {
 
         if (!email.equals("")) { //User has logged in
             //Go to main page (get from Hannah/John)
+
+
         } else { //User hasn't logged in yet
             setContentView(R.layout.sign_in_page);
         }

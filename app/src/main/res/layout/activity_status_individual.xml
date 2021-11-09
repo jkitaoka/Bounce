@@ -24,7 +24,7 @@
         android:id="@+id/backButton"
         android:layout_width="91dp"
         android:layout_height="67dp"
-
+        android:onClick="goToStatusMain"
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.108"
