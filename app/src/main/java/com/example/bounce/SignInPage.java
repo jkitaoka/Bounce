@@ -18,6 +18,7 @@ public class SignInPage extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("bounce", Context.MODE_PRIVATE);
         sharedPreferences.edit().putString("email", email).apply();
         //Go to Main page (get from Hannah/John)
+        goToBarHome(view);//test - John
     }
 
 
@@ -30,6 +31,12 @@ public class SignInPage extends AppCompatActivity {
         Intent intent = new Intent(this, BarOnboarding.class);
         startActivity(intent);
     }
+
+    public void goToBarHome(View view) {
+        Intent intent = new Intent(this, BarSideMain.class);
+        startActivity(intent);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

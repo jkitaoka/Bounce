@@ -14,20 +14,25 @@ public class statusMain extends AppCompatActivity {
         setContentView(R.layout.activity_status_main);
     }
 
-    public void goToPostStatus(View view) {
-        Intent intent = new Intent(this, PostStatus.class);
-        startActivity(intent);
-    }
-
-
-    public void goToStatusIndividual(View view) {
-        Intent intent = new Intent(this, StatusIndividual.class);
-        intent.putExtra("header", "Status Header");
-        intent.putExtra("body", "Status Body");
-        //need to pass through rest of status info to status individual activity
-        //and need to lookup on db
-        startActivity(intent);
-    }
+//    public void goToPostStatus(View view) {
+//        Intent intent = new Intent(this, PostStatus.class);
+//        startActivity(intent);
+//    }
+//
+//    public void goToBarMain(View view) {
+//        Intent intent = new Intent(this, BarSideMain.class);
+//        startActivity(intent);
+//    }
+//
+//
+//    public void goToStatusIndividual(View view) {
+//        Intent intent = new Intent(this, StatusIndividual.class);
+////        intent.putExtra("header", "Status Header");
+////        intent.putExtra("body", "Status Body");
+//        //need to pass through rest of status info to status individual activity
+//        //and need to lookup on db
+//        startActivity(intent);
+//    }
 
 
 

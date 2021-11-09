@@ -8,11 +8,11 @@
 
 
     <Button
-        android:id="@+id/startButton"
+        android:id="@+id/postButton"
         android:layout_width="135dp"
         android:layout_height="55dp"
         android:text="Reply"
-
+android:onClick="postResponse"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.826"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -24,7 +24,7 @@
         android:id="@+id/backButton"
         android:layout_width="91dp"
         android:layout_height="67dp"
-
+        android:onClick="goToReviewMain"
         android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.108"

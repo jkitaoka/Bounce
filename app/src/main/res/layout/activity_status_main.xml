@@ -27,7 +27,7 @@
         android:layout_height="67dp"
 
         android:text="Post"
-        android:onClick="goToPostStatus"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -104,7 +104,7 @@
         android:text="Active Status Header"
         android:textAlignment="textStart"
         android:textSize="24sp"
-        android:onClick="goToStatusIndividual"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -117,7 +117,7 @@
         android:layout_width="328dp"
         android:layout_height="55dp"
         android:text="Scheduled Status Header 1"
-        android:onClick="goToStatusIndividual"
+
         android:textAlignment="textStart"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -132,7 +132,7 @@
         android:layout_width="328dp"
         android:layout_height="55dp"
         android:text="Past Status Header 1"
-        android:onClick="goToStatusIndividual"
+
         android:textAlignment="textStart"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -147,7 +147,7 @@
         android:layout_width="328dp"
         android:layout_height="55dp"
         android:text="Scheduled Status Header 2"
-        android:onClick="goToStatusIndividual"
+
         android:textAlignment="textStart"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
