@@ -27,7 +27,7 @@ public class BarSideMain extends AppCompatActivity {
 
 
     public void goToStatusMain(View view) {
-        Intent intent = new Intent(this, statusMain.class);
+        Intent intent = new Intent(this, StatusMain.class);
         startActivity(intent);
     }
 
