@@ -26,6 +26,10 @@ public class SignInPage extends AppCompatActivity {
         Intent intent = new Intent(this, PatronOnboarding.class);
         startActivity(intent);
     }
+    public void goToHomePage(View view) {
+        Intent intent = new Intent(this, HomePage.class);
+        startActivity(intent);
+    }
 
     public void goToBarOnboarding(View view) {
         Intent intent = new Intent(this, BarOnboarding.class);

@@ -10,8 +10,8 @@ import java.util.TimerTask;
 
 public class LoadingPage extends AppCompatActivity {
 
-    private void goToSignInPage() {
-        Intent intent = new Intent(this, SignInPage.class);
+    private void goToHomePage() {
+        Intent intent = new Intent(this, HomePage.class);
         startActivity(intent);
     }
 
@@ -24,8 +24,8 @@ public class LoadingPage extends AppCompatActivity {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             public void run() {
-                goToSignInPage();
+                goToHomePage();
             }
-        }, 4000);
+        }, 3000);
     }
 }

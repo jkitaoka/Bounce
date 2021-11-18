@@ -16,6 +16,9 @@
             android:name=".BarSideMain"
             android:exported="true" />
         <activity
+            android:name=".HomePage"
+            android:exported="true" />
+        <activity
             android:name=".BarOnboarding"
             android:exported="true" />
         <activity
