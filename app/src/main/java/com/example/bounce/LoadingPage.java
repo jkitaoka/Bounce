@@ -26,6 +26,6 @@ public class LoadingPage extends AppCompatActivity {
             public void run() {
                 goToSignInPage();
             }
-        }, 1500);
+        }, 4000);
     }
 }
