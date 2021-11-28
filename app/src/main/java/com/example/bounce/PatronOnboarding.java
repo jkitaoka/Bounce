@@ -8,8 +8,8 @@ import android.view.View;
 
 public class PatronOnboarding extends AppCompatActivity {
 
-    public void backClicked(View view) {
-        Intent intent = new Intent (this, SignInPage.class);
+    public void goToHomePage(View view) {
+        Intent intent = new Intent(this, HomePage.class);
         startActivity(intent);
     }
     public void createAccount(View view) {
