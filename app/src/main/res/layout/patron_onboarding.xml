@@ -7,18 +7,17 @@
     tools:context=".PatronOnboarding">
 
     <TextView
-        android:id="@+id/createAnAccount"
+        android:id="@+id/createUserAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create an Account"
-        android:textColor="@color/white"
+        android:text="Create Account"
         android:textSize="35sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.109" />
+        app:layout_constraintVertical_bias="0.129" />
 
     <EditText
         android:id="@+id/enterFirstName"
@@ -34,93 +33,99 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.229" />
+        app:layout_constraintVertical_bias="0.239" />
 
     <EditText
         android:id="@+id/enterLastName"
-        android:layout_width="307dp"
-        android:layout_height="62dp"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
         android:background="#ffffff"
         android:hint="Last Name"
+        android:minHeight="48dp"
         android:singleLine="true"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.338" />
+        app:layout_constraintVertical_bias="0.359" />
+
 
     <EditText
         android:id="@+id/enterEmail"
-        android:layout_width="306dp"
-        android:layout_height="63dp"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
         android:background="#ffffff"
         android:hint="Email Address"
+        android:minHeight="48dp"
         android:singleLine="true"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.474" />
+        app:layout_constraintVertical_bias="0.477" />
+
 
     <EditText
         android:id="@+id/enterPassword"
-        android:layout_width="307dp"
-        android:layout_height="63dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="300sp"
+        android:layout_height="wrap_content"
         android:background="#ffffff"
         android:hint="Password"
-        android:singleLine="true"
-        android:textSize="20sp"
-        app:layout_constraintHorizontal_bias="0.528"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/enterEmail" />
-
-    <EditText
-        android:id="@+id/enterDOB"
-        android:layout_width="183dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="216dp"
-        android:background="#ffffff"
-        android:hint="MM/DD/YYYY"
+        android:minHeight="48dp"
         android:singleLine="true"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.859"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.602" />
+
+    <EditText
+        android:id="@+id/enterDOB"
+        android:layout_width="150sp"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:hint="MM/DD/YYYY"
+        android:minHeight="48dp"
+        android:singleLine="true"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.723" />
 
     <TextView
         android:id="@+id/dateOfBirth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Date of Birth"
-        android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="17sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.173"
+        app:layout_constraintHorizontal_bias="0.187"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.711" />
+        app:layout_constraintVertical_bias="0.723" />
 
     <CheckBox
         android:id="@+id/checkBox"
-        android:layout_width="326dp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="I agree to the terms and conditions"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.833" />
+        app:layout_constraintVertical_bias="0.827" />
 
     <ImageView
         android:id="@+id/backButton"
@@ -141,7 +146,7 @@
         android:layout_width="244dp"
         android:layout_height="59dp"
         android:backgroundTint="#231f20"
-        android:onClick="createAccount"
+        android:onClick="createClicked"
         android:radius="100dp"
         android:text="Create Account"
         android:textAllCaps="false"
@@ -149,11 +154,11 @@
         android:textSize="20sp"
         app:cornerRadius="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.947"
+        app:layout_constraintVertical_bias="0.946"
         app:strokeColor="#FFFFFF"
         app:strokeWidth="3dp" />
 

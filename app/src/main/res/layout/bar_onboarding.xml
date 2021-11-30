@@ -6,20 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".BarOnboarding">
 
-    <ImageView
-        android:id="@+id/backButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:onClick="backClicked"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.04"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.04"
-        app:srcCompat="@drawable/ic_back"
-        tools:ignore="SpeakableTextPresentCheck" />
-
     <TextView
         android:id="@+id/createBarAccount"
         android:layout_width="wrap_content"
@@ -111,6 +97,20 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.768" />
+
+    <ImageView
+        android:id="@+id/backButton"
+        android:layout_width="44dp"
+        android:layout_height="28dp"
+        android:onClick="backClicked"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.04"
+        app:srcCompat="@drawable/ic_back"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
         android:id="@+id/createAccountButton"

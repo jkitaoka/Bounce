@@ -12,7 +12,7 @@ public class PatronOnboarding extends AppCompatActivity {
         Intent intent = new Intent (this, SignInPage.class);
         startActivity(intent);
     }
-    public void createAccount(View view) {
+    public void createClicked(View view) {
         Intent intent = new Intent (this, ContentMainPage.class);
         startActivity(intent);
     }
