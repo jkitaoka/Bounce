@@ -14,17 +14,10 @@ public class BarSideMain extends AppCompatActivity {
         setContentView(R.layout.activity_bar_side_main);
     }
 
-    public void goToSettings(View view) {
-//        Intent intent = new Intent(this, asdfasdf.class);
-//        startActivity(intent);
-    }
-
     public void goToLogOut(View view) {
         Intent intent = new Intent(this, SignInPage.class);
         startActivity(intent);
     }
-
-
 
     public void goToStatusMain(View view) {
         Intent intent = new Intent(this, StatusMain.class);
