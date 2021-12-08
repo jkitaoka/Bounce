@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
@@ -20,100 +22,96 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Locale;
+import java.util.TimeZone;
 
 public class PatronOnboarding extends AppCompatActivity {
-    DatePickerDialog picker;
     EditText editFirstName, editLastName, editAge, editEmail, editPassword;
-    private FirebaseAuth mAuth;
+    String firstName, lastName, email, password;
+
+    private static final String TAG = "PatronOnboarding";
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     public void backClicked(View view) {
         Intent intent = new Intent (this, SignInPage.class);
         startActivity(intent);
     }
 
+    public void pickDate(View view) {
+        editAge = (EditText) findViewById(R.id.enterDOB);
+
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog dialog = new DatePickerDialog(
+                PatronOnboarding.this,
+                android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                mDateSetListener,
+                year,month,day);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+
+
+        Calendar max = Calendar.getInstance();
+        max.set(year-21, month, day); //Today's date 21 years ago to ensure user is 21
+        dialog.getDatePicker().setMaxDate(max.getTimeInMillis());
+        Calendar min = Calendar.getInstance();
+        min.set(year-120, month, day); // The oldest person alive is 118, so max age is 120 :)
+        dialog.getDatePicker().setMinDate(min.getTimeInMillis());
+
+        dialog.show();
+
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                editAge.setText(month+1+"/"+day+"/"+year);
+            }
+        };
+    }
+
     public void createClicked(View view) {
-        Log.i("click", "Create clicked in patron onboarding");
-        if (calculateAge(editAge) < 21)  {
-            // Sign in fails because the user is not > 21
-            Toast.makeText(PatronOnboarding.this, "You must be over 21 use Bounce.",
-                    Toast.LENGTH_SHORT).show();
-        } else { // Store the user in the database
-
-//            String firstName = editFirstName.getText().toString();
-//            String lastName = editLastName.getText().toString();
-            String email = editEmail.getText().toString();
-            String password = editPassword.getText().toString();
-            if (email.equals("") || password.equals("")) {
-                Toast.makeText(PatronOnboarding.this, "Fields cannot be left blank.",
-                        Toast.LENGTH_SHORT).show();
-            }
-
-//            User user = new User(firstName, lastName, email, password);
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the user's information
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    Log.i("update UI", "update UI method called");
-                                    updateUI(user);
-                                } else {
-                                    // If sign in fails, display a message to the user
-                                    Toast.makeText(PatronOnboarding.this, "Sign in failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                    updateUI(null);
-                                }
-                            }
-                        });
-            }
-        }
-
-    private void updateUI(FirebaseUser user) { // This will send the patron to the main page
+        Log.i(TAG, "create clicked");
         Intent intent = new Intent(this, ContentMainPage.class);
         startActivity(intent);
+
+        firstName = editFirstName.getText().toString();
+        lastName = editLastName.getText().toString();
+        email = editEmail.getText().toString();
+        password = editPassword.getText().toString();
+
+        writeNewUser(email, password, firstName, lastName);
     }
 
+    public void writeNewUser(String email, String password, String firstName, String lastName) { // Test that this works
+        User user = new User(password, firstName, lastName, false);
 
+        Log.i("PatronOnboarding", "Write user to database");
 
-    public int calculateAge(EditText editAge) {
-        String dateString = editAge.toString();
-
-
-        return 0;
+        //Write to database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference("users");
+//        // Need to figure out how to make the child the email rather than how you're doing it here
+        reference.child("daddydevito@gmail.com").setValue(user);
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.patron_onboarding);
 
-        editAge = (EditText) findViewById(R.id.enterDOB); //Remember this is in the MM/DD/YYYY format
-        editAge.setInputType(InputType.TYPE_NULL);
-        editAge.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Calendar cldr = Calendar.getInstance();
-                int day = cldr.get(Calendar.DAY_OF_MONTH);
-                int month = cldr.get(Calendar.MONTH);
-                int year = cldr.get(Calendar.YEAR);
-                // date picker dialog
-                picker = new DatePickerDialog(PatronOnboarding.this,
-                        new DatePickerDialog.OnDateSetListener() {
-                            @Override
-                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                                editAge.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
-                            }
-                        }, year, month, day);
-                picker.show();
-            }
-        });
-        mAuth = FirebaseAuth.getInstance();
+        editFirstName = (EditText) findViewById(R.id.enterFirstName);
+        editLastName = (EditText) findViewById(R.id.enterLastName);
+        editEmail = (EditText) findViewById(R.id.enterEmail);
+        editPassword = (EditText) findViewById(R.id.enterPassword);
     }
 }

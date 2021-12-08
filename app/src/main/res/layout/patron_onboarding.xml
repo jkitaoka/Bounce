@@ -91,6 +91,7 @@
         android:layout_height="wrap_content"
         android:background="#ffffff"
         android:hint="MM/DD/YYYY"
+        android:onClick="pickDate"
         android:minHeight="48dp"
         android:singleLine="true"
         android:textSize="20sp"

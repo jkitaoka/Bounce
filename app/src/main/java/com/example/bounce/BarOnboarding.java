@@ -17,20 +17,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class BarOnboarding extends AppCompatActivity {
 
-    class Bar {
-        public String password;
-        public String name;
-        public String lastNameOrAddress;
-        public boolean isBar;
-
-        public Bar(String password, String name, String lastNameOrAddress, boolean isBar) {
-            this.password = password;
-            this.name = name;
-            this.lastNameOrAddress = lastNameOrAddress;
-            this.isBar = isBar;
-        }
-    }
-
     EditText editName, editAddress, editEmail, editPassword;
     String barName, barAddress, email, password;
 
@@ -53,22 +39,23 @@ public class BarOnboarding extends AppCompatActivity {
     }
 
     public void writeNewUser(String email, String password, String barName, String barAddress) {
-        Bar bar = new Bar(password, barName, barAddress, true);
+        User bar = new User(password, barName, barAddress, true);
         Log.i("BarOnboarding", "Write message to database");
 
         //Write to database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("users");
-        // Need to figure out how to make the child the email rather than how you're doing it here
-        reference.child("the double U").setValue(bar);
+//        // Need to figure out how to make the child the email rather than how you're doing it here
+        reference.child("The Double U").setValue(bar);
+//
 
-        // Read from database
-        reference.child("the double U").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-           @Override
-           public void onComplete(@NonNull Task<DataSnapshot> task) {
-               Log.d("firebase", String.valueOf(task.getResult().getValue()));
-           }
-        });
+//        // Read from database
+//        reference.child("the double U").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+//           @Override
+//           public void onComplete(@NonNull Task<DataSnapshot> task) {
+//               Log.d("firebase", String.valueOf(task.getResult().getValue()));
+//           }
+//        });
     }
 
 
@@ -78,7 +65,6 @@ public class BarOnboarding extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bar_onboarding);
 
-        // Get user input
         editName = (EditText) findViewById(R.id.enterBarName);
         editAddress = (EditText) findViewById(R.id.enterBarAddress);
         editEmail = (EditText) findViewById(R.id.enterEmail);
