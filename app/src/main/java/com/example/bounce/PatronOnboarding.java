@@ -37,6 +37,8 @@ public class PatronOnboarding extends AppCompatActivity {
     EditText editFirstName, editLastName, editAge, editEmail, editPassword;
     String firstName, lastName, email, password;
 
+    FirebaseAuth mAuth;
+
     private static final String TAG = "PatronOnboarding";
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
@@ -90,6 +92,31 @@ public class PatronOnboarding extends AppCompatActivity {
         password = editPassword.getText().toString();
 
         writeNewUser(email, password, firstName, lastName);
+
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with signed-in user's information
+                            Log.i("BarOnboarding", "Creating Firebase User");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user
+                            Toast.makeText(PatronOnboarding.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                            updateUI(null);
+                        }
+                    }
+                });
+    }
+
+    public void updateUI(FirebaseUser user) {
+        // Get user from database
+//        if (user.getEmail()) in database .isB
+        Intent intent = new Intent(this, ContentMainPage.class);
+        startActivity(intent);
     }
 
     public void writeNewUser(String email, String password, String firstName, String lastName) { // Test that this works
@@ -100,7 +127,7 @@ public class PatronOnboarding extends AppCompatActivity {
         //Write to database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("users");
-//        // Need to figure out how to make the child the email rather than how you're doing it here
+        // Need to figure out how to make the child the email rather than how you're doing it here
         reference.child("daddydevito@gmail.com").setValue(user);
     }
 
@@ -108,6 +135,8 @@ public class PatronOnboarding extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.patron_onboarding);
+
+        mAuth = FirebaseAuth.getInstance();
 
         editFirstName = (EditText) findViewById(R.id.enterFirstName);
         editLastName = (EditText) findViewById(R.id.enterLastName);

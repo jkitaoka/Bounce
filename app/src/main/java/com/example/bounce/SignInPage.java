@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,42 +16,49 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignInPage extends AppCompatActivity {
     private FirebaseAuth mAuth;
     EditText editEmail, editPassword;
+    String email, password;
 
     public void loginClicked(View view) {
-        editEmail = (EditText) findViewById(R.id.enterEmail);
-        editPassword = (EditText) findViewById(R.id.enterPassword);
+        Log.d("SignInPage", "login clicked, signing in");
 
-        String email = editEmail.toString();
-        String password = editPassword.toString();
-        if (email != null && password != null) {
+        email = editEmail.getText().toString();
+        password = editPassword.getText().toString();
 
-            mAuth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                updateUI(user);
-                            } else {
-                                Toast.makeText(SignInPage.this, "Login failed.",
-                                        Toast.LENGTH_SHORT);
-                            }
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        Log.d("SignInPage", "task complete");
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("SignInPage", "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("SignInPage", "signInWithEmail:failure", task.getException());
+                            Toast.makeText(SignInPage.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
                         }
-                    });
-            goToBarHome(view);
-        } else {
-            Toast.makeText(SignInPage.this, "Fields cannot be left blank.",
-                    Toast.LENGTH_SHORT);
-        }
+                    }
+                });
     }
 
-    private void updateUI(FirebaseUser user) {
-        // Edit this method
+    public void updateUI(FirebaseUser user) {
+        // You will eventually have to change this method depending
+        // whether a bar or user is signing in
+        Log.d("SignInPage", "updating UI");
+        Intent intent = new Intent(this, BarSideMain.class);
+        startActivity(intent);
+
+//        Intent intent = new Intent(this, ContentMainPage.class);
+//        startActivity(intent);
     }
 
 
@@ -73,12 +81,30 @@ public class SignInPage extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.i("SignInPage", "onStart");
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser != null){
+            Log.i("SignInPage", "current user not null");
+            reload();
+        }
+    }
+
+    private void reload() {
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_in_page);
-
+        Log.d("SignInPage", "Creating mAuth");
         mAuth = FirebaseAuth.getInstance();
+        Log.d("SignInPage", "Getting email + password");
+        editEmail = (EditText) findViewById(R.id.email);
+        editPassword = (EditText) findViewById(R.id.password);
     }
 }
