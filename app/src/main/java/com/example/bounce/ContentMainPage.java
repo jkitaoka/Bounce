@@ -44,6 +44,10 @@ public class ContentMainPage extends AppCompatActivity {
         // Connecting Adapter class with the Recycler view*/
         recyclerView.setAdapter(adapter);
     }
+    public void goToBarInfo(View view) {
+        Intent intent = new Intent(this, BarInfo.class);
+        startActivity(intent);
+    }
     // Function to tell the app to start getting
     // data from database on starting of the activity
     @Override protected void onStart()
@@ -59,8 +63,5 @@ public class ContentMainPage extends AppCompatActivity {
         super.onStop();
         adapter.stopListening();
     }
-    public void goToBarInfo(View view) {
-        Intent intent = new Intent(this, BarInfo.class);
-        startActivity(intent);
-    }
+
 }
