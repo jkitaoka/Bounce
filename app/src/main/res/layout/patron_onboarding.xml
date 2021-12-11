@@ -75,6 +75,7 @@
         android:layout_height="wrap_content"
         android:background="#ffffff"
         android:hint="Password"
+        android:inputType="textPassword"
         android:minHeight="48dp"
         android:singleLine="true"
         android:textSize="20sp"

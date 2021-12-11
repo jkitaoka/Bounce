@@ -16,6 +16,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class SignInPage extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -51,12 +56,55 @@ public class SignInPage extends AppCompatActivity {
     public void updateUI(FirebaseUser user) {
         // You will eventually have to change this method depending
         // whether a bar or user is signing in
-        Log.d("SignInPage", "updating UI");
-        Intent intent = new Intent(this, BarSideMain.class);
-        startActivity(intent);
+        Log.i("SignInPage", "updating UI");
+        // here you have to determine if bar or user
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference reference = database.getReference();
+        String userID = user.getUid();
+        Log.i("SignInPage", userID);
 
-//        Intent intent = new Intent(this, ContentMainPage.class);
-//        startActivity(intent);
+        // Iterate through bars to determine if user is a bar
+        database.getReference().child("bars")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            Log.i("SignInPage","inside for loop");
+                            String UID = snapshot.getKey();
+                            Log.i("SignInPage", UID);
+                            if (UID.equals(userID)) {
+                                // they are a bar, send to bar page
+                                Log.i("SignInPage","send to bar main");
+                                Intent intent = new Intent(SignInPage.this, BarSideMain.class);
+                                startActivity(intent);
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+
+        // Iterate through users to determine if user is a patron
+        database.getReference().child("users")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            String UID = snapshot.getKey();
+                            Log.i("SignInPage", UID);
+                            if (UID.equals(userID)) {
+                                // they are a bar, send to bar page
+                                Log.i("SignInPage","send to patron main");
+                                Intent intent = new Intent(SignInPage.this, ContentMainPage.class);
+                                startActivity(intent);
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
     }
 
     private void reload() {
@@ -78,12 +126,6 @@ public class SignInPage extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void goToBarHome(View view) {
-        Intent intent = new Intent(this, BarSideMain.class);
-        startActivity(intent);
-    }
-
-
     @Override
     public void onStart() {
         super.onStart();
@@ -91,7 +133,6 @@ public class SignInPage extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            Log.i("SignInPage", "current user not null");
             reload();
         }
     }
