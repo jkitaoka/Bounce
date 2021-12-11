@@ -35,7 +35,7 @@ import java.util.TimeZone;
 
 public class PatronOnboarding extends AppCompatActivity {
     EditText editFirstName, editLastName, editAge, editEmail, editPassword;
-    String firstName, lastName, email, password;
+    String firstName, lastName, email, password, userID;
 
     FirebaseAuth mAuth;
 
@@ -91,8 +91,6 @@ public class PatronOnboarding extends AppCompatActivity {
         email = editEmail.getText().toString();
         password = editPassword.getText().toString();
 
-        writeNewUser(email, password, firstName, lastName);
-
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -101,6 +99,9 @@ public class PatronOnboarding extends AppCompatActivity {
                             // Sign in success, update UI with signed-in user's information
                             Log.i("BarOnboarding", "Creating Firebase User");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            userID = user.getUid();
+
+                            writeNewUser(userID, firstName, lastName);
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user
@@ -119,16 +120,15 @@ public class PatronOnboarding extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void writeNewUser(String email, String password, String firstName, String lastName) { // Test that this works
-        User user = new User(password, firstName, lastName, false);
+    public void writeNewUser(String userID, String firstName, String lastName) {
+        User user = new User(firstName, lastName, false);
 
         Log.i("PatronOnboarding", "Write user to database");
 
         //Write to database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("users");
-        // Need to figure out how to make the child the email rather than how you're doing it here
-        reference.child("daddydevito@gmail.com").setValue(user);
+        reference.child(userID).setValue(user);
     }
 
     @Override
