@@ -1,13 +1,11 @@
 package com.example.bounce;
 
 public class User {
-    public String name;
-    public String lastNameOrAddress;
-    public boolean isBar;
+    public String firstName;
+    public String lastName;
 
-    public User(String name, String lastNameOrAddress, boolean isBar) {
-        this.name = name;
-        this.lastNameOrAddress = lastNameOrAddress;
-        this.isBar = isBar;
+    public User(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName= lastName;
     }
 }

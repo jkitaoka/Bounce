@@ -83,8 +83,6 @@ public class PatronOnboarding extends AppCompatActivity {
 
     public void createClicked(View view) {
         Log.i(TAG, "create clicked");
-        Intent intent = new Intent(this, ContentMainPage.class);
-        startActivity(intent);
 
         firstName = editFirstName.getText().toString();
         lastName = editLastName.getText().toString();
@@ -97,7 +95,7 @@ public class PatronOnboarding extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with signed-in user's information
-                            Log.i("BarOnboarding", "Creating Firebase User");
+                            Log.i(TAG, "Creating Firebase User");
                             FirebaseUser user = mAuth.getCurrentUser();
                             userID = user.getUid();
 
@@ -121,13 +119,14 @@ public class PatronOnboarding extends AppCompatActivity {
     }
 
     public void writeNewUser(String userID, String firstName, String lastName) {
-        User user = new User(firstName, lastName, false);
+        User user = new User(firstName, lastName);
 
-        Log.i("PatronOnboarding", "Write user to database");
+        Log.i(TAG, "Write user to database");
 
         //Write to database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference reference = database.getReference("users");
+        Log.i(TAG, "Write user to database");
         reference.child(userID).setValue(user);
     }
 
