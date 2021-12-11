@@ -67,26 +67,19 @@ public class BarOnboarding extends AppCompatActivity {
 
     public void writeNewUser(String userID, String barName, String barAddress) {
 
-        User bar = new User(barName, barAddress, true);
+        Bar bar = new Bar(barName, barAddress);
         Log.i("BarOnboarding", "Write user to database");
         //Write to database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference reference = database.getReference("users");
+        DatabaseReference reference = database.getReference("bars");
 
 //        // Need to figure out how to make the child the email rather than how you're doing it here
         Log.i("BarOnboarding", "Setting email as child reference");
 
         reference.child(userID).setValue(bar);
-//
-
-//        // Read from database
-//        reference.child("the double U").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
-//           @Override
-//           public void onComplete(@NonNull Task<DataSnapshot> task) {
-//               Log.d("firebase", String.valueOf(task.getResult().getValue()));
-//           }
-//        });
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +88,7 @@ public class BarOnboarding extends AppCompatActivity {
         setContentView(R.layout.bar_onboarding);
 
         mAuth = FirebaseAuth.getInstance();
+        // Delete this:
 
         editName = (EditText) findViewById(R.id.enterBarName);
         editAddress = (EditText) findViewById(R.id.enterBarAddress);
