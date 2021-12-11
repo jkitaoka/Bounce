@@ -1,16 +1,13 @@
 package com.example.bounce;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
-import android.view.View;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.firebase.ui.database.FirebaseRecyclerOptions;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,16 +25,22 @@ public class BarInfo extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i("BarInfo", "Creating...");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bar_info);
 
+        Log.i("BarInfo", "Get firebase reference");
+
         mbase = FirebaseDatabase.getInstance().getReference();
+        Log.i("BarInfo", "Query");
         Query query = mbase.child("bars").orderByChild("barname");
 
         query.addValueEventListener((new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Log.i("BarInfo", "In data change");
                 for(DataSnapshot data: snapshot.getChildren()){
+                    Log.i("BarInfo", "In for loop");
                     String barNames = data.child("barname").getValue().toString();
                     barName.setText(barNames);
                 }
@@ -51,6 +54,4 @@ public class BarInfo extends AppCompatActivity {
         }));
 
     }
-
-
 }

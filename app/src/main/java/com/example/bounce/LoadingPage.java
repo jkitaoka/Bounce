@@ -1,15 +1,18 @@
 package com.example.bounce;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -22,33 +25,77 @@ public class LoadingPage extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        if (currentUser != null) { // User is signed in
-//            // Determine if user is a bar or customer
-//            // Go to appropriate page; this will be some attribute in the database
-//
-//        } else {
-//            Log.i("loading page", "go to home page");
-//            goToHomePage(); // Go to signing page if user is not already signed in
-//        }
-//    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        //Loads activity for 1.5 seconds
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            public void run() {
+            }
+        }, 3000);
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null) { // User is signed in
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            String userID = user.getUid();
+            Log.i("LoadingPage", userID);
+
+            // Iterate through bars to determine if user is a bar
+            database.getReference().child("bars")
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                Log.i("SignInPage","inside for loop");
+                                String UID = snapshot.getKey();
+                                Log.i("SignInPage", UID);
+                                if (UID.equals(userID)) {
+                                    // they are a bar, send to bar page
+                                    Log.i("SignInPage","send to bar main");
+                                    Intent intent = new Intent(LoadingPage.this, BarSideMain.class);
+                                    startActivity(intent);
+                                }
+                            }
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+                    });
+
+            // Iterate through users to determine if user is a patron
+            database.getReference().child("users")
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                String UID = snapshot.getKey();
+                                Log.i("SignInPage", UID);
+                                if (UID.equals(userID)) {
+                                    // they are a bar, send to bar page
+                                    Log.i("SignInPage","send to patron main");
+                                    Intent intent = new Intent(LoadingPage.this, ContentMainPage.class);
+                                    startActivity(intent);
+                                }
+                            }
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+                    });
+
+        } else {
+            Log.i("loading page", "go to home page");
+            goToHomePage(); // Go to signing page if user is not already signed in
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.loading_page);
 
-//        mAuth = FirebaseAuth.getInstance();
-
-        //Loads activity for 1.5 seconds
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            public void run() {
-                goToHomePage();
-            }
-        }, 3000);
+        mAuth = FirebaseAuth.getInstance();
     }
 }

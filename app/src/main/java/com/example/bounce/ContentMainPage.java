@@ -2,6 +2,7 @@ package com.example.bounce;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -18,8 +20,6 @@ public class ContentMainPage extends AppCompatActivity {
     private RecyclerView recyclerView;
     barNameAdapter adapter; // Create Object of the Adapter class
     DatabaseReference mbase; // Create object of the Firebase Realtime Database
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,9 +45,19 @@ public class ContentMainPage extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
     public void goToBarInfo(View view) {
+        Log.i("ContentMainPage", "Go to Bar Info");
         Intent intent = new Intent(this, BarInfo.class);
+        Log.i("ContentMainPage", "Starting activity...");
         startActivity(intent);
     }
+
+    public void signOut(View view) {
+        FirebaseAuth.getInstance().signOut();
+
+        Intent intent = new Intent(this, SignInPage.class);
+        startActivity(intent);
+    }
+
     // Function to tell the app to start getting
     // data from database on starting of the activity
     @Override protected void onStart()
