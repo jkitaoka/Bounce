@@ -25,7 +25,7 @@ public class BarOnboarding extends AppCompatActivity {
     FirebaseAuth mAuth;
 
     public void backClicked(View view) {
-        Intent intent = new Intent(this, SignInPage.class);
+        Intent intent = new Intent(this, HomePage.class);
         startActivity(intent);
     }
 
