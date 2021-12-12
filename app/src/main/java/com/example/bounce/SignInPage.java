@@ -1,16 +1,14 @@
 package com.example.bounce;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -101,19 +99,19 @@ public class SignInPage extends AppCompatActivity {
                                 editEmail = (EditText) findViewById(R.id.email);
                                 editPassword = (EditText) findViewById(R.id.password);
 
-                                String usernameKey = "username";
-                                String passwordKey = "password";
-
-                                String user  = editEmail.getText().toString();
-                                String password = editPassword.getText().toString();
-                                SharedPreferences sharedPreferences = getSharedPreferences("com.example.bounce", Context.MODE_PRIVATE);
-
-
-                                sharedPreferences.edit().putString(usernameKey, user).apply();
-                                sharedPreferences.edit().putString(passwordKey, password).apply();
-
-                                Toast.makeText(SignInPage.this, "Saved Login Info",
-                                        Toast.LENGTH_SHORT).show();
+//                                String usernameKey = "username";
+//                                String passwordKey = "password";
+//
+//                                String user  = editEmail.getText().toString();
+//                                String password = editPassword.getText().toString();
+//                                SharedPreferences sharedPreferences = getSharedPreferences("com.example.bounce", Context.MODE_PRIVATE);
+//
+//
+//                                sharedPreferences.edit().putString(usernameKey, user).apply();
+//                                sharedPreferences.edit().putString(passwordKey, password).apply();
+//
+//                                Toast.makeText(SignInPage.this, "Saved Login Info",
+//                                        Toast.LENGTH_SHORT).show();
 
                                 Intent intent = new Intent(SignInPage.this, ContentMainPage.class);
                                 startActivity(intent);
@@ -167,24 +165,23 @@ public class SignInPage extends AppCompatActivity {
         Log.d("SignInPage", "Getting email + password");
         editEmail = (EditText) findViewById(R.id.email);
         editPassword = (EditText) findViewById(R.id.password);
-
-        String usernameKey = "username";
-        String passwordKey = "password";
-
-        SharedPreferences sharedPreferences = getSharedPreferences("com.example.bounce", Context.MODE_PRIVATE);
-        if(!sharedPreferences.getString(usernameKey, "").equals("")){
-            String username = sharedPreferences.getString(usernameKey, "");
-            String password = sharedPreferences.getString(passwordKey, "");
-
-            editEmail.setText(username);
-            editPassword.setText(password);
-
-            Toast.makeText(SignInPage.this, "Loaded Login Info",
-                    Toast.LENGTH_SHORT).show();
-
-        }
-        else{
-            //Toast.makeText(SignInPage.this, "No login info",Toast.LENGTH_SHORT).show();
-        }
+//        String usernameKey = "username";
+//        String passwordKey = "password";
+//
+//        SharedPreferences sharedPreferences = getSharedPreferences("com.example.bounce", Context.MODE_PRIVATE);
+//        if(!sharedPreferences.getString(usernameKey, "").equals("")){
+//            String username = sharedPreferences.getString(usernameKey, "");
+//            String password = sharedPreferences.getString(passwordKey, "");
+//
+//            editEmail.setText(username);
+//            editPassword.setText(password);
+//
+//            Toast.makeText(SignInPage.this, "Loaded Login Info",
+//                    Toast.LENGTH_SHORT).show();
+//
+//        }
+//        else{
+//            //Toast.makeText(SignInPage.this, "No login info",Toast.LENGTH_SHORT).show();
+//        }
     }
 }
