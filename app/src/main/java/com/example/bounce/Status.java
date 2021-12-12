@@ -1,8 +1,6 @@
 package com.example.bounce;
 
 
-import java.util.Date;
-
 public class Status {
 
     public String userID;
@@ -13,6 +11,9 @@ public class Status {
     public String startTime;
     public int hours;
 
+    public Status() {
+
+    }
 
     public Status(String userID, String postID, String title, String body, String date, String startTime, int hours) {
         this.userID = userID;

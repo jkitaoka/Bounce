@@ -94,6 +94,7 @@
         android:hint="MM/DD/YYYY"
         android:onClick="pickDate"
         android:inputType="none"
+        android:focusableInTouchMode="false"
         android:minHeight="48dp"
         android:singleLine="true"
         android:textSize="20sp"

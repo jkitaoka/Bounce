@@ -8,7 +8,7 @@
     tools:context=".ContentMainPage">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/olive"
         android:layout_width="48dp"
         android:layout_height="59dp"
         app:layout_constraintBottom_toTopOf="@+id/recycler1"

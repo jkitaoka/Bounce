@@ -1,21 +1,18 @@
 package com.example.bounce;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,13 +22,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
-import java.util.Locale;
-import java.util.TimeZone;
 
 public class PatronOnboarding extends AppCompatActivity {
     EditText editFirstName, editLastName, editAge, editEmail, editPassword;
@@ -48,6 +39,7 @@ public class PatronOnboarding extends AppCompatActivity {
     }
 
     public void pickDate(View view) {
+        Log.i("PatronOnboarding", "Pick date clicked!");
         editAge = (EditText) findViewById(R.id.enterDOB);
 
         Calendar cal = Calendar.getInstance();
@@ -62,21 +54,22 @@ public class PatronOnboarding extends AppCompatActivity {
                 year,month,day);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.BLACK));
 
-
         Calendar max = Calendar.getInstance();
         max.set(year-21, month, day); //Today's date 21 years ago to ensure user is 21
         dialog.getDatePicker().setMaxDate(max.getTimeInMillis());
         Calendar min = Calendar.getInstance();
         min.set(year-120, month, day); // The oldest person alive is 118, so max age is 120 :)
         dialog.getDatePicker().setMinDate(min.getTimeInMillis());
+        Log.i("PatronOnboarding", "Showing dialog");
 
         dialog.show();
 
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                editAge.setText(month+1+"/"+day+"/"+year);
+
+                Log.i("PatronOnboarding", "Setting date..."); // Only enters on second click... why?
+                editAge.setText(month + 1 + "/" + day + "/" + year);
             }
         };
     }
