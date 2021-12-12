@@ -4,14 +4,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +29,7 @@ public class ContentMainPage extends AppCompatActivity {
     private RecyclerView recyclerView;
     barNameAdapter adapter; // Create Object of the Adapter class
     DatabaseReference mbase; // Create object of the Firebase Realtime Database
+    private TextView retrieveBarName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,6 @@ public class ContentMainPage extends AppCompatActivity {
         mbase = FirebaseDatabase.getInstance().getReference("bars");
 
         recyclerView = findViewById(R.id.recycler1);
-
 
 
 
@@ -57,6 +60,7 @@ public class ContentMainPage extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
     public void goToBarInfo(View view) {
+
         Log.i("ContentMainPage", "Go to Bar Info");
         Intent intent = new Intent(this, BarInfo.class);
         Log.i("ContentMainPage", "Starting activity...");
@@ -72,8 +76,7 @@ public class ContentMainPage extends AppCompatActivity {
 
     // Function to tell the app to start getting
     // data from database on starting of the activity
-    @Override protected void onStart()
-    {
+    @Override protected void onStart() {
         super.onStart();
         adapter.startListening();
     }
