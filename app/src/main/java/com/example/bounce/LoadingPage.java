@@ -31,29 +31,9 @@ public class LoadingPage extends AppCompatActivity {
         if (user != null) { // User is signed in
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             String userID = user.getUid();
+            Log.i(TAG, "current user");
             Log.i(TAG, userID);
 
-            // Iterate through bars to determine if user is a bar
-            database.getReference().child("bars")
-                    .addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                Log.i(TAG,"inside for loop");
-                                String UID = snapshot.getKey();
-                                Log.i(TAG, UID);
-                                if (UID.equals(userID)) {
-                                    // they are a bar, send to bar page
-                                    Log.i(TAG,"send to bar main");
-                                    Intent intent = new Intent(LoadingPage.this, BarSideMain.class);
-                                    startActivity(intent);
-                                }
-                            }
-                        }
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                        }
-                    });
 
             // Iterate through users to determine if user is a patron
             database.getReference().child("users")
@@ -62,6 +42,7 @@ public class LoadingPage extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                                 String UID = snapshot.getKey();
+                                Log.i(TAG, "checking user");
                                 Log.i(TAG, UID);
                                 if (UID.equals(userID)) {
                                     // they are a bar, send to bar page
@@ -75,6 +56,31 @@ public class LoadingPage extends AppCompatActivity {
                         public void onCancelled(DatabaseError databaseError) {
                         }
                     });
+
+            // Iterate through bars to determine if user is a bar
+            database.getReference().child("bars")
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                Log.i(TAG,"inside for bar loop");
+                                String UID = snapshot.getKey();
+                                Log.i(TAG, UID);
+                                if (UID.equals(userID)) {
+                                    // they are a bar, send to bar page
+                                    Log.i(TAG,"send to bar main");
+                                    Intent intent = new Intent(LoadingPage.this, BarSideMain.class);
+                                    startActivity(intent);
+                                    break;
+                                }
+                            }
+                        }
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                        }
+                    });
+            Log.i(TAG, "no valid user found. go to home page");
+            goToHomePage();
 
         } else {
             Log.i(TAG, "go to home page");
