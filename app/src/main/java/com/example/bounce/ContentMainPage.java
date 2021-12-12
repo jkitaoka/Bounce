@@ -4,32 +4,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-
-
 public class ContentMainPage extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     barNameAdapter adapter; // Create Object of the Adapter class
     DatabaseReference mbase; // Create object of the Firebase Realtime Database
-    private TextView retrieveBarName;
+    int position;
+    int index;
+    Bar bar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +34,6 @@ public class ContentMainPage extends AppCompatActivity {
         mbase = FirebaseDatabase.getInstance().getReference("bars");
 
         recyclerView = findViewById(R.id.recycler1);
-
-
-
 
         // To display the Recycler view linearly
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -53,18 +45,41 @@ public class ContentMainPage extends AppCompatActivity {
                 .build();
         // Connecting object of required Adapter class to
         // the Adapter class itself
-        /*Log.i("ContentMainPage", "HERE IS THE KEY");
-        Log.i("ContentMainPage", );*/
         adapter = new barNameAdapter(options);
         // Connecting Adapter class with the Recycler view*/
         recyclerView.setAdapter(adapter);
     }
-    public void goToBarInfo(View view) {
 
-        Log.i("ContentMainPage", "Go to Bar Info");
-        Intent intent = new Intent(this, BarInfo.class);
-        Log.i("ContentMainPage", "Starting activity...");
-        startActivity(intent);
+
+    public void goToBarInfo(View view) {
+        Log.i("ContentMainPage", "in bar info");
+        RecyclerView.ViewHolder viewHolder = recyclerView.findContainingViewHolder(view);
+        position = viewHolder.getAdapterPosition();
+        Log.i("ContentMainPage", String.valueOf(position));
+        index = 0;
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        database.getReference().child("bars")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            if (index == position) { // You have reached the desired bar
+                                bar = snapshot.getValue(Bar.class); // Get the bar
+                                Log.i("ContentMainPage", bar.barName);
+                                Intent intent = new Intent(ContentMainPage.this, BarInfo.class);
+                                intent.putExtra("barName", bar.barName);
+                                startActivity(intent);
+                                return;
+                            } else {
+                                index++;
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
     }
 
     public void signOut(View view) {
@@ -76,7 +91,8 @@ public class ContentMainPage extends AppCompatActivity {
 
     // Function to tell the app to start getting
     // data from database on starting of the activity
-    @Override protected void onStart() {
+    @Override protected void onStart()
+    {
         super.onStart();
         adapter.startListening();
     }
