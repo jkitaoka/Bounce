@@ -71,17 +71,16 @@ public class LoadingPage extends AppCompatActivity {
                                     Log.i(TAG,"send to bar main");
                                     Intent intent = new Intent(LoadingPage.this, BarSideMain.class);
                                     startActivity(intent);
+                                    break;
                                 }
-                                Log.i(TAG,"end iteration for bar loop");
-
                             }
-                            Log.i(TAG, "no valid user found. go to home page");
-                            goToHomePage();
                         }
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
                         }
                     });
+            Log.i(TAG, "no valid user found. go to home page");
+            goToHomePage();
 
         } else {
             Log.i(TAG, "go to home page");
