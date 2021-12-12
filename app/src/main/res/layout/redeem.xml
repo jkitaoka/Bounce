@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Redeem">
+
+    <TextView
+        android:layout_width="344dp"
+        android:layout_height="127dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="140dp"
+        android:text="Swipe in front of a bartender to redeem your deal:"
+        android:textSize="30dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.ncorti.slidetoact.SlideToActView
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="340dp"
+        app:inner_color="@color/black"
+        app:layout_constraintRight_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:outer_color="#D12828"
+        app:text="Redeem"
+        app:text_size="30dp"
+        app:text_style="bold" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -21,6 +21,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bounce">
         <activity
+            android:name=".Redeem"
+            android:exported="false" />
+        <activity
             android:name=".PatronCommentReview"
             android:exported="false" />
         <activity

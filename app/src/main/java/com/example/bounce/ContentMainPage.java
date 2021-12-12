@@ -75,11 +75,4 @@ public class ContentMainPage extends AppCompatActivity {
         adapter.stopListening();
     }
 
-    //TODO: remove saved username/password from sharedpreferences
-    public void onLogOut(View view){
-
-    }
-
-
-
 }
