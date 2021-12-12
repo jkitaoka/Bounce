@@ -124,7 +124,7 @@ public class PostStatus extends AppCompatActivity {
 
 
 
-    private void writeNewPost(String userID, String title, String body, String date, String startTime, int hours) {
+    private void writeNewPost(String userID, String title, String body, String date, String startTime, String hours) {
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
 
@@ -151,7 +151,7 @@ public class PostStatus extends AppCompatActivity {
         String body = statusBodyText.getText().toString();
         String date = statusDate.getText().toString();
         String time = startTime.getText().toString();
-        int dur = Integer.parseInt(duration.getText().toString());
+        String dur = duration.getText().toString();
 
         writeNewPost(userID,title,body,date,time,dur);
 

@@ -9,13 +9,13 @@ public class Status {
     public String body;
     public String date;
     public String startTime;
-    public int hours;
+    public String hours;
 
     public Status() {
 
     }
 
-    public Status(String userID, String postID, String title, String body, String date, String startTime, int hours) {
+    public Status(String userID, String postID, String title, String body, String date, String startTime, String hours) {
         this.userID = userID;
         this.postID = postID;
         this.title = title;
