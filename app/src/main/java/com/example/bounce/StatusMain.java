@@ -4,14 +4,238 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 
 public class StatusMain extends AppCompatActivity {
+
+    TextView activeStatusHeader, scheduledStatusHeader1, scheduledStatusHeader2, pastStatusHeader1;
+    FirebaseAuth mAuth;
+    String TAG = "StatusMain";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status_main);
+
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        FirebaseUser user = mAuth.getCurrentUser();
+        String userID = user.getUid();
+
+        ArrayList<String> postIDs = new ArrayList<>();
+        ArrayList<HashMap> statusObjs = new ArrayList<>();
+
+
+        ArrayList<HashMap> activeStatus = new ArrayList<>();
+        ArrayList<HashMap> scheduledStatus = new ArrayList<>();
+        ArrayList<HashMap> pastStatus = new ArrayList<>();
+
+
+        activeStatusHeader = (TextView) findViewById(R.id.activeStatusHeader);
+        scheduledStatusHeader1 = (TextView) findViewById(R.id.scheduledStatusHeader1);
+        scheduledStatusHeader2 = (TextView) findViewById(R.id.scheduledStatusHeader2);
+        pastStatusHeader1 = (TextView) findViewById(R.id.pastStatusHeader1);
+
+        // Iterate through bars to determine if bar posts a status
+        database.getReference().child("posts")
+                .addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            String UID = snapshot.getKey();
+                            HashMap<String,String> v = (HashMap<String,String>) snapshot.getValue();
+
+                            for (DataSnapshot record : snapshot.getChildren()) {
+
+                                String key = record.getKey();
+                                if (key.equals("userID")) {
+                                    String val = (String) record.getValue();
+                                    if (val.equals(userID)) {
+                                        postIDs.add(UID);
+                                        statusObjs.add(v);
+                                    }
+                                }
+                            }
+                        }
+
+
+                        Log.d(TAG, postIDs.toString());
+
+                        ArrayList<String> dateStr = new ArrayList<>();
+
+
+                        for(HashMap<String,String> status:statusObjs){
+                            Log.d(TAG, status.get("title").toString());
+                            Log.d(TAG, status.get("title").toString());
+                            dateStr.add(status.get("date").toString() + " "  + status.get("startTime").toString());
+                        }
+
+
+
+                        //for each status convert date, starttime and duration into start time and end times
+                        Date startDate;
+                        Date endDate;
+                        int dur;
+
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+
+                        Calendar cal = Calendar.getInstance();
+
+                        Date currTime=new Date();
+
+                        Log.d(TAG, dateStr.toString());
+                        for(int i = 0;i<dateStr.size();i++){
+                            try {
+
+                                startDate = dateFormat.parse(dateStr.get(i));
+                                dur = Integer.parseInt(statusObjs.get(i).get("hours").toString());
+                                cal.setTime(startDate);
+                                cal.add(Calendar.HOUR, dur);
+                                endDate = cal.getTime();
+
+                                if(currTime.after(endDate)){
+                                    pastStatus.add(statusObjs.get(i));
+                                }
+
+                                else if(currTime.before(startDate)){
+                                    scheduledStatus.add(statusObjs.get(i));
+                                }
+
+                                else{
+                                    activeStatus.add(statusObjs.get(i));
+                                }
+
+
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        //display active status
+                        if(activeStatus.size() < 1){
+                            activeStatusHeader.setText("No Active Status");
+                            activeStatusHeader.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                }
+                            });
+                        } else{
+                            String header = activeStatus.get(0).get("title").toString();
+                            activeStatusHeader.setText(header);
+                            activeStatusHeader.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    //go to status indiv page
+                                    goToStatusIndividual(view);
+
+                                }
+                            });
+                        }
+
+
+
+                        //display scheduled statuses
+
+                        if(scheduledStatus.size() < 2){
+                            if(scheduledStatus.size() < 1){
+                                scheduledStatusHeader1.setText("No Scheduled Status");
+                                scheduledStatusHeader1.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {} });
+                                scheduledStatusHeader2.setText("No Scheduled Status");
+                                scheduledStatusHeader2.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {} });
+                            } else{
+                                String header = scheduledStatus.get(0).get("title").toString();
+                                scheduledStatusHeader1.setText(header);
+                                scheduledStatusHeader1.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        //go to status indiv page
+                                        goToStatusIndividual(view);
+                                    }
+                                });
+                                scheduledStatusHeader2.setText("No Scheduled Status");
+                                scheduledStatusHeader2.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {} });
+                            }
+
+
+                        } else{
+                            String header = scheduledStatus.get(0).get("title").toString();
+                            scheduledStatusHeader1.setText(header);
+                            scheduledStatusHeader1.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    //go to status indiv page
+                                    goToStatusIndividual(view);
+                                }
+                            });
+
+                            String header1 = scheduledStatus.get(1).get("title").toString();
+                            scheduledStatusHeader2.setText(header1);
+                            scheduledStatusHeader2.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    //go to status indiv page
+                                    goToStatusIndividual(view);
+                                }
+                            });
+                        }
+
+                        //display past statuses
+
+                        if(pastStatus.size() < 1){
+                            pastStatusHeader1.setText("No Past Statuses");
+                            pastStatusHeader1.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+
+                                }
+                            });
+                        } else{
+                            String header = pastStatus.get(0).get("title").toString();
+                            pastStatusHeader1.setText(header);
+                            pastStatusHeader1.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    //go to status indiv page
+                                    goToStatusIndividual(view);
+
+                                }
+                            });
+                        }
+
+
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+
+
+
     }
 
     public void goToPostStatus(View view) {
@@ -27,6 +251,9 @@ public class StatusMain extends AppCompatActivity {
 
     public void goToStatusIndividual(View view) {
         Intent intent = new Intent(this, StatusIndividual.class);
+
+
+
 //        intent.putExtra("header", "Status Header");
 //        intent.putExtra("body", "Status Body");
         //need to pass through rest of status info to status individual activity
