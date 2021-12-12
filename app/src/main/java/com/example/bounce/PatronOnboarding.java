@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -25,8 +26,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Calendar;
 
 public class PatronOnboarding extends AppCompatActivity {
-    EditText editFirstName, editLastName, editAge, editEmail, editPassword;
+    EditText editFirstName, editLastName, editEmail, editPassword;
     String firstName, lastName, email, password, userID;
+    TextView editAge;
 
     FirebaseAuth mAuth;
 
@@ -40,7 +42,16 @@ public class PatronOnboarding extends AppCompatActivity {
 
     public void pickDate(View view) {
         Log.i("PatronOnboarding", "Pick date clicked!");
-        editAge = (EditText) findViewById(R.id.enterDOB);
+        editAge = (TextView) findViewById(R.id.enterDOB);
+
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+
+                Log.i("PatronOnboarding", "Setting date..."); // Only enters on second click... why?
+                editAge.setText(month + 1 + "/" + day + "/" + year);
+            }
+        };
 
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
@@ -63,15 +74,6 @@ public class PatronOnboarding extends AppCompatActivity {
         Log.i("PatronOnboarding", "Showing dialog");
 
         dialog.show();
-
-        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-
-                Log.i("PatronOnboarding", "Setting date..."); // Only enters on second click... why?
-                editAge.setText(month + 1 + "/" + day + "/" + year);
-            }
-        };
     }
 
     public void createClicked(View view) {
