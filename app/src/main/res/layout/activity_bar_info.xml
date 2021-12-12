@@ -7,18 +7,6 @@
     tools:context=".BarInfo">
 
     <TextView
-        android:id="@+id/textView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginEnd="46dp"
-        android:layout_marginBottom="49dp"
-        android:text="10 minutes"
-        app:layout_constraintBottom_toTopOf="@+id/textView14"
-        app:layout_constraintEnd_toStartOf="@+id/button1"
-        app:layout_constraintStart_toEndOf="@+id/textView12" />
-
-    <TextView
         android:id="@+id/BarName"
         android:layout_width="772dp"
         android:layout_height="85dp"
@@ -138,16 +126,28 @@
         app:layout_constraintTop_toBottomOf="@+id/textView10"
         app:layout_constraintVertical_bias="0.0" />
 
+
     <TextView
         android:id="@+id/textView12"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="38dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="24dp"
         android:text="Wait Time:"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView13"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="44dp"
+        android:layout_marginTop="24dp"
+        android:text="10 minutes"
+        app:layout_constraintLeft_toRightOf="@+id/textView12"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <TextView
         android:id="@+id/textView14"

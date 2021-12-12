@@ -44,6 +44,7 @@ public class ContentMainPage extends AppCompatActivity {
         // Connecting Adapter class with the Recycler view*/
         recyclerView.setAdapter(adapter);
     }
+
     public void goToBarInfo(View view) {
         Log.i("ContentMainPage", "Go to Bar Info");
         Intent intent = new Intent(this, BarInfo.class);

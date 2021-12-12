@@ -7,6 +7,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -29,7 +30,7 @@ public class PatronOnboarding extends AppCompatActivity {
     EditText editFirstName, editLastName, editEmail, editPassword;
     String firstName, lastName, email, password, userID;
     TextView editAge;
-
+    CheckBox checkBox;
     FirebaseAuth mAuth;
 
     private static final String TAG = "PatronOnboarding";
@@ -84,31 +85,34 @@ public class PatronOnboarding extends AppCompatActivity {
         email = editEmail.getText().toString();
         password = editPassword.getText().toString();
 
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with signed-in user's information
-                            Log.i(TAG, "Creating Firebase User");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            userID = user.getUid();
+        if (firstName.equals("") || lastName.equals("") || email.equals("")
+                || password.equals("") || !checkBox.isChecked()) {
+            Toast.makeText(PatronOnboarding.this, "Fields cannot be left blank.",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with signed-in user's information
+                                Log.i(TAG, "Creating Firebase User");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                userID = user.getUid();
 
-                            writeNewUser(userID, firstName, lastName);
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user
-                            Toast.makeText(PatronOnboarding.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
+                                writeNewUser(userID, firstName, lastName);
+                                updateUI(user);
+                            } else {
+                                // If sign in fails, display a message to the user
+                                Toast.makeText(PatronOnboarding.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
                         }
-                    }
-                });
+                    });
+        }
     }
 
     public void updateUI(FirebaseUser user) {
-        // Get user from database
-//        if (user.getEmail()) in database .isB
         Intent intent = new Intent(this, ContentMainPage.class);
         startActivity(intent);
     }
@@ -136,5 +140,6 @@ public class PatronOnboarding extends AppCompatActivity {
         editLastName = (EditText) findViewById(R.id.enterLastName);
         editEmail = (EditText) findViewById(R.id.enterEmail);
         editPassword = (EditText) findViewById(R.id.enterPassword);
+        checkBox = (CheckBox) findViewById(R.id.checkBox);
     }
 }
