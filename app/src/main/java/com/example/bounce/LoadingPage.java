@@ -49,6 +49,7 @@ public class LoadingPage extends AppCompatActivity {
                                     Log.i(TAG,"send to patron main");
                                     Intent intent = new Intent(LoadingPage.this, ContentMainPage.class);
                                     startActivity(intent);
+                                    return;
                                 }
                             }
                         }
@@ -71,7 +72,7 @@ public class LoadingPage extends AppCompatActivity {
                                     Log.i(TAG,"send to bar main");
                                     Intent intent = new Intent(LoadingPage.this, BarSideMain.class);
                                     startActivity(intent);
-                                    break;
+                                    return;
                                 }
                             }
                         }
@@ -79,8 +80,8 @@ public class LoadingPage extends AppCompatActivity {
                         public void onCancelled(DatabaseError databaseError) {
                         }
                     });
-            Log.i(TAG, "no valid user found. go to home page");
-            goToHomePage();
+//            Log.i(TAG, "no valid user found. go to home page");
+//            goToHomePage();
 
         } else {
             Log.i(TAG, "go to home page");
