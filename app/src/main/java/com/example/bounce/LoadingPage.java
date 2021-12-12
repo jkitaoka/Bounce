@@ -31,21 +31,23 @@ public class LoadingPage extends AppCompatActivity {
         if (user != null) { // User is signed in
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             String userID = user.getUid();
+            Log.i(TAG, "current user");
             Log.i(TAG, userID);
 
-            // Iterate through bars to determine if user is a bar
-            database.getReference().child("bars")
+
+            // Iterate through users to determine if user is a patron
+            database.getReference().child("users")
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                                Log.i(TAG,"inside for loop");
                                 String UID = snapshot.getKey();
+                                Log.i(TAG, "checking user");
                                 Log.i(TAG, UID);
                                 if (UID.equals(userID)) {
                                     // they are a bar, send to bar page
-                                    Log.i(TAG,"send to bar main");
-                                    Intent intent = new Intent(LoadingPage.this, BarSideMain.class);
+                                    Log.i(TAG,"send to patron main");
+                                    Intent intent = new Intent(LoadingPage.this, ContentMainPage.class);
                                     startActivity(intent);
                                 }
                             }
@@ -55,21 +57,26 @@ public class LoadingPage extends AppCompatActivity {
                         }
                     });
 
-            // Iterate through users to determine if user is a patron
-            database.getReference().child("users")
+            // Iterate through bars to determine if user is a bar
+            database.getReference().child("bars")
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                                Log.i(TAG,"inside for bar loop");
                                 String UID = snapshot.getKey();
                                 Log.i(TAG, UID);
                                 if (UID.equals(userID)) {
                                     // they are a bar, send to bar page
-                                    Log.i(TAG,"send to patron main");
-                                    Intent intent = new Intent(LoadingPage.this, ContentMainPage.class);
+                                    Log.i(TAG,"send to bar main");
+                                    Intent intent = new Intent(LoadingPage.this, BarSideMain.class);
                                     startActivity(intent);
                                 }
+                                Log.i(TAG,"end iteration for bar loop");
+
                             }
+                            Log.i(TAG, "no valid user found. go to home page");
+                            goToHomePage();
                         }
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
