@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".statusMain">
+    tools:context=".StatusMain">
 
 
     <Button
         android:id="@+id/homeButton"
         android:layout_width="91dp"
         android:layout_height="67dp"
-
+android:onClick="goToBarMain"
         android:text="Home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.108"
@@ -27,7 +27,7 @@
         android:layout_height="67dp"
 
         android:text="Post"
-
+        android:onClick="goToPostStatus"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintLeft_toLeftOf="parent"
