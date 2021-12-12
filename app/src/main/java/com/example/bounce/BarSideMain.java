@@ -22,7 +22,7 @@ public class BarSideMain extends AppCompatActivity {
     }
 
     public void goToStatusMain(View view) {
-        Intent intent = new Intent(this, StatusMain.class);
+        Intent intent = new Intent(this, PostStatus.class);
         startActivity(intent);
     }
 

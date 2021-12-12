@@ -105,7 +105,6 @@
         android:ems="10"
         android:hint="Date"
         android:inputType="date"
-        android:onClick="pickDate"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.169"
