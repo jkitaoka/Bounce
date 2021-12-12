@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,11 +37,8 @@ import java.util.Map;
 public class PostStatus extends AppCompatActivity {
 
     EditText statusHeadText, statusBodyText, statusDate, startTime,duration;
-    private DatePickerDialog.OnDateSetListener mDateSetListener;
-
-    String userID, postID, email, password;
+    String userID;
     FirebaseAuth mAuth;
-    public static Integer count = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,6 +154,10 @@ public class PostStatus extends AppCompatActivity {
         int dur = Integer.parseInt(duration.getText().toString());
 
         writeNewPost(userID,title,body,date,time,dur);
+
+        Toast.makeText(PostStatus.this, "Status Posted!",
+                Toast.LENGTH_SHORT).show();
+
         goToStatusMain(view);
     }
 
