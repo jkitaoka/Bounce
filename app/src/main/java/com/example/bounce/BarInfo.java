@@ -32,7 +32,6 @@ public class BarInfo extends AppCompatActivity {
     public void getPosts(String barId) {
         Log.i(TAG, "Get posts from database");
 
-
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         database.getReference().child("posts")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
