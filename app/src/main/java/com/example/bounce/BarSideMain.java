@@ -49,7 +49,6 @@ public class BarSideMain extends AppCompatActivity {
 
         activeStatusHeaders = (TextView) findViewById(R.id.activeStatusHeaders);
         totalDealsRedeemed = (TextView) findViewById(R.id.totalDealsRedeemed);
-        dailyDealsRedeemed = (TextView) findViewById(R.id.dailyDealsRedeemed);
 
 
         /*
@@ -148,6 +147,11 @@ public class BarSideMain extends AppCompatActivity {
                 });
 
     }
+
+    public void updateRedemption() {
+
+    }
+
 
     public void signOut(View view) {
         FirebaseAuth.getInstance().signOut();

@@ -91,6 +91,8 @@ public class BarInfo extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int id) {
                         redeem1.setEnabled(false);
                         redeem1.setBackgroundColor(Color.GRAY);
+                        // Add to total deals and times this deal was redeemed
+
                     }
                 })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
