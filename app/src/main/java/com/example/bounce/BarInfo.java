@@ -2,7 +2,6 @@ package com.example.bounce;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -37,7 +36,6 @@ public class BarInfo extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            Log.i(TAG, "Getting snapshot...");
                             status = snapshot.getValue(Status.class);
                             if (status.userID.equals(barId)) { // This post belongs to the bar!
                                 Log.i(TAG, "Found bar post");
@@ -45,6 +43,7 @@ public class BarInfo extends AppCompatActivity {
                                 if (one==true) {
                                     reward1.setText(status.title); // Ideally replace with an active field, here just alternate between post 1 and 2
                                     body1.setText(status.body);
+                                    one=false;
                                 } else {
                                     reward2.setText(status.title);
                                     body2.setText(status.body);
