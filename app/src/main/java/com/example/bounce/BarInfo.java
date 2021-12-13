@@ -92,7 +92,7 @@ public class BarInfo extends AppCompatActivity {
                         redeem1.setEnabled(false);
                         redeem1.setBackgroundColor(Color.GRAY);
                         // Add to total deals and times this deal was redeemed
-
+                        // Check every post to find the one that matches reward 1 and increase its numRedemptions by 1
                     }
                 })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {

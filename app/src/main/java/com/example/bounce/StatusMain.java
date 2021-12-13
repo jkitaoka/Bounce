@@ -87,8 +87,6 @@ public class StatusMain extends AppCompatActivity {
                             dateStr.add(status.get("date").toString() + " "  + status.get("startTime").toString());
                         }
 
-
-
                         //for each status convert date, starttime and duration into start time and end times
                         Date startDate;
                         Date endDate;
@@ -121,8 +119,6 @@ public class StatusMain extends AppCompatActivity {
                                 else{
                                     activeStatus.add(statusObjs.get(i));
                                 }
-
-
                             } catch (ParseException e) {
                                 e.printStackTrace();
                             }

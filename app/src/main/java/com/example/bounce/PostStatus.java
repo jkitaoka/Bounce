@@ -132,6 +132,7 @@ public class PostStatus extends AppCompatActivity {
         String date = statusDate.getText().toString();
         String time = startTime.getText().toString();
         String dur = duration.getText().toString();
+        int numRedemptions = 0;
 
         if (title.equals("") || body.equals("") || date.equals("")
                 || time.equals("") || dur.equals("")) {
