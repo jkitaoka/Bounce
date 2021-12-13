@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -166,6 +167,40 @@ public class BarInfo extends AppCompatActivity {
                     }
                 });
 
+        mbase.child("activity")
+                .addListenerForSingleValueEvent(new ValueEventListener(){
+
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            String recordID = snapshot.getKey();
+
+                            for (DataSnapshot record : snapshot.getChildren()) {
+
+                                String key = record.getKey();
+                                if (key.equals("postID")) {
+                                    String val = (String) record.getValue();
+                                    if (val.equals(statusID1.getText().toString())) {
+                                        redeem1.setEnabled(false);
+                                        redeem1.setBackgroundColor(Color.GRAY);
+                                    }
+
+                                    else if(val.equals(statusID2.getText().toString())){
+                                        redeem2.setEnabled(false);
+                                        redeem2.setBackgroundColor(Color.GRAY);
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
 
 
