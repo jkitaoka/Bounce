@@ -20,6 +20,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+
 public class BarInfo extends AppCompatActivity {
     DatabaseReference mbase;
     TextView barName, reward1, reward2, body1, body2, statusID1, statusID2;
@@ -32,45 +39,140 @@ public class BarInfo extends AppCompatActivity {
     public void getPosts(String barId) {
         Log.i(TAG, "Get posts from database");
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        database.getReference().child("posts")
+
+        ArrayList<String> postIDs = new ArrayList<>();
+        ArrayList<HashMap> statusObjs = new ArrayList<>();
+
+
+        ArrayList<HashMap> activeStatus = new ArrayList<>();
+        ArrayList<HashMap> scheduledStatus = new ArrayList<>();
+        ArrayList<HashMap> pastStatus = new ArrayList<>();
+
+
+        barName = findViewById(R.id.BarName);
+        redeem1 = findViewById(R.id.deal1);
+        redeem2 = findViewById(R.id.deal2);
+        reward1 = findViewById(R.id.reward1);
+        reward2 = findViewById(R.id.reward2);
+        body1 = findViewById(R.id.body1);
+        body2 = findViewById(R.id.body2);
+        statusID1 = findViewById(R.id.statusID1);
+        statusID2 = findViewById(R.id.statusID2);
+
+
+        mbase = FirebaseDatabase.getInstance().getReference();
+        mAuth = FirebaseAuth.getInstance();
+
+
+        // Iterate through bars to determine if bar posts a status
+        mbase.child("posts")
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                            status = snapshot.getValue(Status.class);
-                            if (status.userID.equals(barId)) { // This post belongs to the bar!
-                                Log.i(TAG, "Found bar post");
-                                // alternate between reward 1 and 2
-                                if (one==true) {
-                                    reward1.setText(status.title); // Ideally replace with an active field, here just alternate between post 1 and 2
-                                    body1.setText(status.body);
-                                    statusID1.setText(status.postID);
-                                    if (!status.title.equals("")) {
-                                        redeem1.setEnabled(true);
-                                        Log.i(TAG, "Setting background color for reward 1");
-                                        redeem1.setBackgroundColor(getResources().getColor(R.color.olive_green));
-                                        one = false;
+                            String UID = snapshot.getKey();
+                            HashMap<String, String> v = (HashMap<String, String>) snapshot.getValue();
+
+                            for (DataSnapshot record : snapshot.getChildren()) {
+
+                                String key = record.getKey();
+                                if (key.equals("userID")) {
+                                    String val = (String) record.getValue();
+                                    if (val.equals(barId)) {
+                                        postIDs.add(UID);
+                                        statusObjs.add(v);
                                     }
-                                } else {
-                                    reward2.setText(status.title);
-                                    body2.setText(status.body);
-                                    statusID2.setText(status.postID);
-                                    if (!status.title.equals("")) {
-                                        redeem2.setEnabled(true);
-                                        Log.i(TAG, "Setting background color for reward 2");
-                                        redeem2.setBackgroundColor(getResources().getColor(R.color.olive_green));
-                                        one=true;
-                                    }
-                                }
                                 }
                             }
                         }
+
+
+                        Log.d(TAG, postIDs.toString());
+
+                        ArrayList<String> dateStr = new ArrayList<>();
+
+
+                        for (HashMap<String, String> status : statusObjs) {
+                            Log.d(TAG, status.get("title").toString());
+                            dateStr.add(status.get("date").toString() + " " + status.get("startTime").toString());
+                        }
+
+                        //for each status convert date, starttime and duration into start time and end times
+                        Date startDate;
+                        Date endDate;
+                        int dur;
+
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy HH:mm");
+
+                        Calendar cal = Calendar.getInstance();
+
+                        Date currTime = new Date();
+
+                        Log.d(TAG, dateStr.toString());
+                        for (int i = 0; i < dateStr.size(); i++) {
+                            try {
+
+                                startDate = dateFormat.parse(dateStr.get(i));
+                                dur = Integer.parseInt(statusObjs.get(i).get("hours").toString());
+                                cal.setTime(startDate);
+                                cal.add(Calendar.HOUR, dur);
+                                endDate = cal.getTime();
+
+                                if (currTime.after(endDate)) {
+                                    pastStatus.add(statusObjs.get(i));
+                                } else if (currTime.before(startDate)) {
+                                    scheduledStatus.add(statusObjs.get(i));
+                                } else {
+                                    activeStatus.add(statusObjs.get(i));
+                                }
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        //display active status
+                        if (activeStatus.size() < 1) {
+
+                        } else {
+                            if (activeStatus.size() < 2) {
+                                reward1.setText(activeStatus.get(0).get("title").toString()); // Ideally replace with an active field, here just alternate between post 1 and 2
+                                body1.setText(activeStatus.get(0).get("body").toString());
+                                statusID1.setText(activeStatus.get(0).get("postID").toString());
+                                redeem1.setEnabled(true);
+                                Log.i(TAG, "Setting background color for reward 1");
+                                redeem1.setBackgroundColor(getResources().getColor(R.color.olive_green));
+
+                            } else { // There are two active statuses
+                                reward1.setText(activeStatus.get(0).get("title").toString()); // Ideally replace with an active field, here just alternate between post 1 and 2
+                                body1.setText(activeStatus.get(0).get("body").toString());
+                                statusID1.setText(activeStatus.get(0).get("postID").toString());
+                                redeem1.setEnabled(true);
+                                Log.i(TAG, "Setting background color for reward 1");
+                                redeem1.setBackgroundColor(getResources().getColor(R.color.olive_green));
+
+                                reward2.setText(activeStatus.get(1).get("title").toString()); // Ideally replace with an active field, here just alternate between post 1 and 2
+                                body2.setText(activeStatus.get(1).get("body").toString());
+                                statusID2.setText(activeStatus.get(1).get("postID").toString());
+                                redeem2.setEnabled(true);
+                                Log.i(TAG, "Setting background color for reward 2");
+                                redeem2.setBackgroundColor(getResources().getColor(R.color.olive_green));
+
+                            }
+                        }
+
+                    }
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                     }
                 });
+
+
+
+
     }
+
+
+
 
     @Override
     public void onStart() {

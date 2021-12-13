@@ -177,7 +177,7 @@ public class StatusMain extends AppCompatActivity {
                                 scheduledStatusHeader1.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {} });
-                                scheduledStatusHeader2.setText("No Scheduled Status");
+                                scheduledStatusHeader2.setText("");
                                 scheduledStatusHeader2.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {} });
@@ -191,7 +191,7 @@ public class StatusMain extends AppCompatActivity {
                                         goToStatusIndividual(view, scheduledStatus.get(0));
                                     }
                                 });
-                                scheduledStatusHeader2.setText("No Scheduled Status");
+                                scheduledStatusHeader2.setText("");
                                 scheduledStatusHeader2.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {} });
