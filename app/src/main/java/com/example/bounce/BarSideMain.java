@@ -148,11 +148,6 @@ public class BarSideMain extends AppCompatActivity {
 
     }
 
-    public void updateRedemption() {
-
-    }
-
-
     public void signOut(View view) {
         FirebaseAuth.getInstance().signOut();
 

@@ -6,32 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".StatusIndividual">
 
-
-    <Button
-        android:id="@+id/deleteButton"
-        android:layout_width="135dp"
-        android:layout_height="55dp"
-        android:text="Delete"
-
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.851"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.958" />
-
-    <Button
+    <ImageView
         android:id="@+id/backButton"
-        android:layout_width="91dp"
-        android:layout_height="67dp"
+        android:layout_width="44dp"
+        android:layout_height="28dp"
         android:onClick="goToStatusMain"
-        android:text="Back"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.108"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.975" />
+        app:layout_constraintVertical_bias="0.04"
+        app:srcCompat="@drawable/ic_back"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
 
     <TextView
@@ -43,11 +30,11 @@
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.058" />
+        app:layout_constraintVertical_bias="0.112" />
 
     <TextView
         android:id="@+id/statusHeadText"
@@ -58,11 +45,11 @@
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="0.457"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.22" />
+        app:layout_constraintVertical_bias="0.372" />
 
     <TextView
         android:id="@+id/statusBodyText"
@@ -72,11 +59,11 @@
         android:textAlignment="textStart"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintHorizontal_bias="0.441"
+        app:layout_constraintVertical_bias="0.589"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.368" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/statisticsBodyText"
@@ -87,11 +74,11 @@
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.447"
+        app:layout_constraintHorizontal_bias="0.482"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.764" />
+        app:layout_constraintVertical_bias="0.901" />
 
     <TextView
         android:id="@+id/statusDate"
@@ -99,13 +86,12 @@
         android:layout_height="53dp"
         android:ems="10"
         android:text="Date"
-
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.141"
+        app:layout_constraintHorizontal_bias="0.127"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.138" />
+        app:layout_constraintVertical_bias="0.224" />
 
     <TextView
         android:id="@+id/statusStartTime"
@@ -115,10 +101,11 @@
         android:text="Start Time"
 
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.138" />
+        app:layout_constraintVertical_bias="0.224" />
 
     <TextView
         android:id="@+id/duration"
@@ -126,12 +113,11 @@
         android:layout_height="53dp"
         android:ems="10"
         android:text="Duration"
-
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.86"
+        app:layout_constraintHorizontal_bias="0.85"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.138" />
+        app:layout_constraintVertical_bias="0.224" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
