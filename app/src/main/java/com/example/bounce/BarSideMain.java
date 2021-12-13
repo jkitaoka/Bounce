@@ -49,7 +49,6 @@ public class BarSideMain extends AppCompatActivity {
 
         activeStatusHeaders = (TextView) findViewById(R.id.activeStatusHeaders);
         totalDealsRedeemed = (TextView) findViewById(R.id.totalDealsRedeemed);
-        dailyDealsRedeemed = (TextView) findViewById(R.id.dailyDealsRedeemed);
 
 
         /*
@@ -75,7 +74,7 @@ public class BarSideMain extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             String UID = snapshot.getKey();
-                            HashMap<String,String> v = (HashMap<String,String>) snapshot.getValue();
+                            HashMap<String, String> v = (HashMap<String, String>) snapshot.getValue();
 
                             for (DataSnapshot record : snapshot.getChildren()) {
 
@@ -94,10 +93,10 @@ public class BarSideMain extends AppCompatActivity {
 
                         ArrayList<String> dateStr = new ArrayList<>();
 
-                        for(HashMap<String,String> status:statusObjs){
+                        for (HashMap<String, String> status : statusObjs) {
                             Log.d(TAG, status.get("title").toString());
                             Log.d(TAG, status.get("title").toString());
-                            dateStr.add(status.get("date").toString() + " "  + status.get("startTime").toString());
+                            dateStr.add(status.get("date").toString() + " " + status.get("startTime").toString());
                         }
 
 
@@ -110,10 +109,10 @@ public class BarSideMain extends AppCompatActivity {
 
                         Calendar cal = Calendar.getInstance();
 
-                        Date currTime=new Date();
+                        Date currTime = new Date();
 
                         Log.d(TAG, dateStr.toString());
-                        for(int i = 0;i<dateStr.size();i++){
+                        for (int i = 0; i < dateStr.size(); i++) {
                             try {
 
                                 startDate = dateFormat.parse(dateStr.get(i));
@@ -122,7 +121,7 @@ public class BarSideMain extends AppCompatActivity {
                                 cal.add(Calendar.HOUR, dur);
                                 endDate = cal.getTime();
 
-                                if(!currTime.after(endDate) && !currTime.before(startDate)){
+                                if (!currTime.after(endDate) && !currTime.before(startDate)) {
                                     activeStatus.add(statusObjs.get(i));
                                 }
                             } catch (ParseException e) {
@@ -130,22 +129,27 @@ public class BarSideMain extends AppCompatActivity {
                             }
                         }
 
-                        //display active status
-                        if(activeStatus.size() < 1){
+                        Log.i(TAG, "Display active status");
+                        if (activeStatus.size() < 1) {
                             activeStatusHeaders.setText("No Active Status!");
-                        } else{
-                            if(activeStatus.size() < 2 ){
-                                activeStatusHeaders.setText(activeStatus.get(0).get("title").toString());
-                            } else{
-                                activeStatusHeaders.setText(activeStatus.get(0).get("title").toString() + "\n" + activeStatus.get(1).get("title").toString());
-                            }
+                        } else if (activeStatus.size() < 2) {
+                            Log.i(TAG, "One status");
+                            activeStatusHeaders.setText(activeStatus.get(0).get("title").toString());
+                        } else {
+                            Log.i(TAG, "Two statuses");
+                            activeStatusHeaders.setText(activeStatus.get(0).get("title").toString() + "\n" + activeStatus.get(1).get("title").toString());
                         }
-
                     }
+
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
                     }
                 });
+
+    }
+
+    public void updateRedemption() {
+
     }
 
 

@@ -1,13 +1,12 @@
 package com.example.bounce;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,7 +24,7 @@ import java.util.HashMap;
 
 public class StatusMain extends AppCompatActivity {
 
-    TextView activeStatusHeader, scheduledStatusHeader1, scheduledStatusHeader2, pastStatusHeader1;
+    TextView activeStatusHeader, activeStatusHeader2, scheduledStatusHeader1, scheduledStatusHeader2;
     FirebaseAuth mAuth;
     String TAG = "StatusMain";
 
@@ -50,9 +49,9 @@ public class StatusMain extends AppCompatActivity {
 
 
         activeStatusHeader = (TextView) findViewById(R.id.activeStatusHeader);
+        activeStatusHeader2 = (TextView) findViewById(R.id.activeStatusHeader2);
         scheduledStatusHeader1 = (TextView) findViewById(R.id.scheduledStatusHeader1);
         scheduledStatusHeader2 = (TextView) findViewById(R.id.scheduledStatusHeader2);
-        pastStatusHeader1 = (TextView) findViewById(R.id.pastStatusHeader1);
 
         // Iterate through bars to determine if bar posts a status
         database.getReference().child("posts")
@@ -135,17 +134,41 @@ public class StatusMain extends AppCompatActivity {
                             activeStatusHeader.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) { }});
-                        } else{
-                            String header = activeStatus.get(0).get("title").toString();
-                            activeStatusHeader.setText(header);
-                            activeStatusHeader.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    //go to status indiv page
-                                    goToStatusIndividual(view, activeStatus.get(0));
+                        } else {
+                            if (activeStatus.size() < 2) {
+                                String header = activeStatus.get(0).get("title").toString();
+                                activeStatusHeader.setText(header);
+                                activeStatusHeader.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        //go to status indiv page
+                                        goToStatusIndividual(view, activeStatus.get(0));
 
-                                }
-                            });
+                                    }
+                                });
+                            } else { // There are two active statuses
+                                String header1 = activeStatus.get(0).get("title").toString();
+                                activeStatusHeader.setText(header1);
+                                activeStatusHeader.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        //go to status indiv page
+                                        goToStatusIndividual(view, activeStatus.get(0));
+
+                                    }
+                                });
+
+                                String header2 = activeStatus.get(1).get("title").toString();
+                                activeStatusHeader2.setText(header2);
+                                activeStatusHeader2.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        //go to status indiv page
+                                        goToStatusIndividual(view, activeStatus.get(1));
+                                    }
+                                });
+
+                            }
                         }
 
 
@@ -201,29 +224,28 @@ public class StatusMain extends AppCompatActivity {
                             });
                         }
 
-                        //display past statuses
-
-                        if(pastStatus.size() < 1){
-                            pastStatusHeader1.setText("No Past Statuses");
-                            pastStatusHeader1.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-
-                                }
-                            });
-                        } else{
-                            String header = pastStatus.get(0).get("title").toString();
-                            pastStatusHeader1.setText(header);
-                            pastStatusHeader1.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
-                                    //go to status indiv page
-                                    goToStatusIndividual(view, pastStatus.get(0));
-
-                                }
-                            });
-                        }
-
+//                        //display past statuses
+//
+//                        if(pastStatus.size() < 1){
+//                            pastStatusHeader1.setText("No Past Statuses");
+//                            pastStatusHeader1.setOnClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View view) {
+//
+//                                }
+//                            });
+//                        } else{
+//                            String header = pastStatus.get(0).get("title").toString();
+//                            pastStatusHeader1.setText(header);
+//                            pastStatusHeader1.setOnClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View view) {
+//                                    //go to status indiv page
+//                                    goToStatusIndividual(view, pastStatus.get(0));
+//
+//                                }
+//                            });
+//                        }
 
                     }
                     @Override
