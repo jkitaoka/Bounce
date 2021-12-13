@@ -86,7 +86,7 @@ public class ContentMainPage extends AppCompatActivity {
     public void signOut(View view) {
         FirebaseAuth.getInstance().signOut();
 
-        Intent intent = new Intent(this, SignInPage.class);
+        Intent intent = new Intent(this, HomePage.class);
         startActivity(intent);
     }
 

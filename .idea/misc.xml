@@ -3,7 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Creative Cloud Files/Classes/CS 407/Bounce/app/src/main/res/layout/activity_bar_info.xml" value="0.10207100591715976" />
+        <entry key="..\:/Creative Cloud Files/Classes/CS 407/Bounce/app/src/main/res/layout/activity_bar_info.xml" value="0.16666666666666666" />
         <entry key="..\:/Creative Cloud Files/Classes/CS 407/Bounce/app/src/main/res/layout/activity_bar_side_main.xml" value="0.3333333333333333" />
         <entry key="..\:/Creative Cloud Files/Classes/CS 407/Bounce/app/src/main/res/layout/activity_content_main_page.xml" value="0.1078125" />
         <entry key="..\:/Creative Cloud Files/Classes/CS 407/Bounce/app/src/main/res/layout/activity_details.xml" value="0.1743659420289855" />
@@ -23,7 +23,6 @@
         <entry key="..\:/Creative Cloud Files/Classes/CS 407/Bounce/app/src/main/res/layout/loading_page.xml" value="0.22" />
         <entry key="..\:/Creative Cloud Files/Classes/CS 407/Bounce/app/src/main/res/layout/patron_onboarding.xml" value="0.23011363636363635" />
         <entry key="..\:/Creative Cloud Files/Classes/CS 407/Bounce/app/src/main/res/layout/sign_in_page.xml" value="0.5" />
-        <entry key="app/src/main/res/layout/activity_bar_info.xml" value="0.2433163550162653" />
         <entry key="app/src/main/res/layout/activity_feedback_main.xml" value="0.22507237492775267" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.10060395450395221" />
         <entry key="app/src/main/res/layout/activity_post_status.xml" value="0.2441123188405797" />
@@ -31,7 +30,6 @@
         <entry key="app/src/main/res/layout/activity_review_response.xml" value="0.11980749746707194" />
         <entry key="app/src/main/res/layout/activity_status_individual.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_status_main.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/content_main_page.xml" value="0.1461499493414387" />
         <entry key="app/src/main/res/layout/fragment_first.xml" value="0.3037813595502019" />
       </map>
     </option>
