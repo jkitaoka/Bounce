@@ -5,55 +5,75 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BarSideMain">
+
     <ImageView
         android:id="@+id/olive"
         android:layout_width="48dp"
         android:layout_height="59dp"
-        app:layout_constraintBottom_toTopOf="@+id/welcomeText"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.955"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.023"
         app:srcCompat="@drawable/ic_mini_logo" />
+
 
     <ImageView
         android:id="@+id/logout"
         android:layout_width="40dp"
         android:layout_height="50dp"
-        app:layout_constraintBottom_toTopOf="@+id/welcomeText"
+        android:layout_marginTop="16dp"
+        android:onClick="signOut"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.043"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/white"
-        android:onClick="signOut"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/ic_baseline_exit_to_app_24" />
+        app:srcCompat="@drawable/ic_baseline_exit_to_app_24"
+        app:tint="@color/white" />
 
     <Button
         android:id="@+id/statusButton"
-        android:layout_width="355dp"
-        android:layout_height="61dp"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="70dp"
+        android:backgroundTint="#647926"
+        android:enabled="true"
         android:onClick="goToStatusMain"
         android:text="View Statuses"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:cornerRadius="10sp"
+        app:iconTint="#D12828"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.616" />
+        app:layout_constraintVertical_bias="0.78" />
 
     <Button
         android:id="@+id/postStatus"
-        android:layout_width="355dp"
-        android:layout_height="61dp"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_margin="70dp"
+        android:backgroundTint="#647926"
+        android:enabled="true"
         android:onClick="goToPostStatus"
         android:text="Post New Status"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:cornerRadius="10sp"
+        app:iconTint="#D12828"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.768" />
+        app:layout_constraintVertical_bias="0.996" />
 
     <TextView
         android:id="@+id/welcomeText"
@@ -89,9 +109,10 @@
         android:layout_width="321dp"
         android:layout_height="89dp"
         android:text=""
-        android:textAlignment="textStart"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:textAlignment="center"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -103,7 +124,7 @@
         android:layout_width="328dp"
         android:layout_height="39dp"
         android:text="Total Redemptions: "
-        android:textAlignment="textStart"
+        android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"

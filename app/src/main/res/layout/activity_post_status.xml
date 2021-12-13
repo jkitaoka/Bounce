@@ -6,10 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".PostStatus">
 
+    <ImageView
+        android:id="@+id/backButton"
+        android:layout_width="44dp"
+        android:layout_height="28dp"
+        android:onClick="goToStatusMain"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.04"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.04"
+        app:srcCompat="@drawable/ic_back"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+    <ImageView
+        android:id="@+id/olive"
+        android:layout_width="48dp"
+        android:layout_height="59dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.955"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023"
+        app:srcCompat="@drawable/ic_mini_logo" />
 
     <TextView android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:focusable="true"
         android:focusableInTouchMode="true"
         tools:ignore="MissingConstraints">
@@ -17,34 +41,27 @@
         <requestFocus/>
     </TextView>
 
-
     <Button
         android:id="@+id/postButton"
-        android:layout_width="135dp"
-        android:layout_height="55dp"
-        android:text="Post"
+        android:layout_width="150dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="70dp"
+        android:backgroundTint="#647926"
+        android:enabled="true"
         android:onClick="postStatus"
+        android:text="Post"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="13sp"
+        app:cornerRadius="10sp"
+        app:iconTint="#D12828"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.851"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.655" />
-
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="91dp"
-        android:layout_height="67dp"
-
-        android:text="Back"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.108"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.975"
-        android:onClick="goToStatusMain"
-        />
+        app:layout_constraintVertical_bias="0.976" />
 
 
     <TextView
@@ -56,11 +73,30 @@
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.566"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.058" />
+        app:layout_constraintVertical_bias="0.207" />
+
+    <EditText
+        android:id="@+id/statusBodyText"
+        android:layout_width="325dp"
+        android:layout_height="100dp"
+        android:hint="Status Body"
+        android:lineSpacingExtra="8sp"
+        android:textAlignment="viewStart"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.546"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.396" />
 
     <EditText
         android:id="@+id/statusHeadText"
@@ -73,30 +109,11 @@
         android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintHorizontal_bias="0.566"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.139" />
-
-    <EditText
-        android:id="@+id/statusBodyText"
-        android:layout_width="325dp"
-        android:layout_height="100dp"
-        android:lineSpacingExtra="8sp"
-        android:hint="Status Body"
-        android:textColorHint="@color/white"
-        android:textAlignment="viewStart"
-
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textColor="@color/white"
-        android:textSize="28sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.236" />
+        app:layout_constraintVertical_bias="0.288" />
 
     <TextView
         android:id="@+id/postForText"
@@ -106,11 +123,11 @@
         android:textAlignment="textStart"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.154"
+        app:layout_constraintHorizontal_bias="0.168"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.477" />
+        app:layout_constraintVertical_bias="0.645" />
 
     <EditText
         android:id="@+id/statusDate"
@@ -149,15 +166,15 @@
         android:layout_width="189dp"
         android:layout_height="46dp"
         android:ems="10"
-        android:textColorHint="@color/white"
-        android:inputType="number"
         android:hint="Duration (Hours)"
+        android:inputType="number"
         android:textColor="@color/white"
+        android:textColorHint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.873"
+        app:layout_constraintHorizontal_bias="0.927"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.472" />
+        app:layout_constraintVertical_bias="0.648" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
