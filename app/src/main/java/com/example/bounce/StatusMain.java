@@ -220,28 +220,7 @@ public class StatusMain extends AppCompatActivity {
                             });
                         }
 
-//                        //display past statuses
-//
-//                        if(pastStatus.size() < 1){
-//                            pastStatusHeader1.setText("No Past Statuses");
-//                            pastStatusHeader1.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View view) {
-//
-//                                }
-//                            });
-//                        } else{
-//                            String header = pastStatus.get(0).get("title").toString();
-//                            pastStatusHeader1.setText(header);
-//                            pastStatusHeader1.setOnClickListener(new View.OnClickListener() {
-//                                @Override
-//                                public void onClick(View view) {
-//                                    //go to status indiv page
-//                                    goToStatusIndividual(view, pastStatus.get(0));
-//
-//                                }
-//                            });
-//                        }
+
 
                     }
                     @Override

@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -145,6 +146,47 @@ public class BarSideMain extends AppCompatActivity {
                     public void onCancelled(DatabaseError databaseError) {
                     }
                 });
+
+
+
+        database.getReference().child("activity")
+                .addListenerForSingleValueEvent(new ValueEventListener(){
+
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        int totalCount = 0;
+                        int dailyCount = 0;
+
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            String recordID = snapshot.getKey();
+
+                            for (DataSnapshot record : snapshot.getChildren()) {
+
+                                String key = record.getKey();
+                                if (key.equals("barID")) {
+                                    String val = (String) record.getValue();
+                                    if (val.equals(userID)) {
+                                        totalCount++;
+                                    }
+                                }
+
+                            }
+                        }
+
+                        totalDealsRedeemed.setText("Total Redemptions: " + String.valueOf(totalCount));
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+
+
+
 
     }
 
