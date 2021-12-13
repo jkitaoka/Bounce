@@ -125,7 +125,7 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.119" />
+        app:layout_constraintVertical_bias="0.044" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
@@ -215,6 +215,26 @@
             app:iconTint="#D12828" />
 
     </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/statusID1"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="283dp"
+        tools:layout_editor_absoluteY="692dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/statusID2"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="105dp"
+        tools:layout_editor_absoluteY="686dp"
+        tools:ignore="MissingConstraints" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
