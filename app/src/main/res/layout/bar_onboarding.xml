@@ -116,7 +116,7 @@
     <Button
         android:id="@+id/createAccountButton"
         android:layout_width="244dp"
-        android:layout_height="59dp"
+        android:layout_height="70dp"
         android:backgroundTint="#231f20"
         android:onClick="createClicked"
         android:radius="100dp"
