@@ -20,13 +20,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-
 public class BarInfo extends AppCompatActivity {
     DatabaseReference mbase;
     TextView barName, reward1, reward2, body1, body2, statusID1, statusID2;
@@ -51,19 +44,25 @@ public class BarInfo extends AppCompatActivity {
                                 Log.i(TAG, "Found bar post");
                                 // alternate between reward 1 and 2
                                 if (one==true) {
-
                                     reward1.setText(status.title); // Ideally replace with an active field, here just alternate between post 1 and 2
                                     body1.setText(status.body);
                                     statusID1.setText(status.postID);
-                                    Log.d(TAG, status.postID);
-                                    one=false;
+                                    if (!status.title.equals("")) {
+                                        redeem1.setEnabled(true);
+                                        Log.i(TAG, "Setting background color for reward 1");
+                                        redeem1.setBackgroundColor(getResources().getColor(R.color.olive_green));
+                                        one = false;
+                                    }
                                 } else {
-
                                     reward2.setText(status.title);
                                     body2.setText(status.body);
                                     statusID2.setText(status.postID);
-                                    one=true;
-                                    Log.d(TAG, status.postID);
+                                    if (!status.title.equals("")) {
+                                        redeem2.setEnabled(true);
+                                        Log.i(TAG, "Setting background color for reward 2");
+                                        redeem2.setBackgroundColor(getResources().getColor(R.color.olive_green));
+                                        one=true;
+                                    }
                                 }
                                 }
                             }

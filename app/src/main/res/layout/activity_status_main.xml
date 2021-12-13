@@ -106,7 +106,7 @@
         android:id="@+id/activeStatusHeader"
         android:layout_width="328dp"
         android:layout_height="55dp"
-        android:text="Active Status Header"
+        android:text=""
         android:textAlignment="textStart"
         android:textSize="24sp"
 
