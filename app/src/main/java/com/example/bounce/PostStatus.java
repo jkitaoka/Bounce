@@ -130,6 +130,9 @@ public class PostStatus extends AppCompatActivity {
 
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("posts");
+
+
+        //METHOD FOR GETTING UNIQUE ID's
         String postID = reference.push().getKey();
 
         Status status = new Status(userID, postID, title, body, date, startTime, hours);

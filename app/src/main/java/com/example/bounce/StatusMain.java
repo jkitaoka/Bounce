@@ -134,10 +134,7 @@ public class StatusMain extends AppCompatActivity {
                             activeStatusHeader.setText("No Active Status");
                             activeStatusHeader.setOnClickListener(new View.OnClickListener() {
                                 @Override
-                                public void onClick(View view) {
-
-                                }
-                            });
+                                public void onClick(View view) { }});
                         } else{
                             String header = activeStatus.get(0).get("title").toString();
                             activeStatusHeader.setText(header);
@@ -145,7 +142,7 @@ public class StatusMain extends AppCompatActivity {
                                 @Override
                                 public void onClick(View view) {
                                     //go to status indiv page
-                                    goToStatusIndividual(view);
+                                    goToStatusIndividual(view, activeStatus.get(0));
 
                                 }
                             });
@@ -172,7 +169,7 @@ public class StatusMain extends AppCompatActivity {
                                     @Override
                                     public void onClick(View view) {
                                         //go to status indiv page
-                                        goToStatusIndividual(view);
+                                        goToStatusIndividual(view, scheduledStatus.get(0));
                                     }
                                 });
                                 scheduledStatusHeader2.setText("No Scheduled Status");
@@ -189,7 +186,7 @@ public class StatusMain extends AppCompatActivity {
                                 @Override
                                 public void onClick(View view) {
                                     //go to status indiv page
-                                    goToStatusIndividual(view);
+                                    goToStatusIndividual(view, scheduledStatus.get(0));
                                 }
                             });
 
@@ -199,7 +196,7 @@ public class StatusMain extends AppCompatActivity {
                                 @Override
                                 public void onClick(View view) {
                                     //go to status indiv page
-                                    goToStatusIndividual(view);
+                                    goToStatusIndividual(view, scheduledStatus.get(1));
                                 }
                             });
                         }
@@ -221,7 +218,7 @@ public class StatusMain extends AppCompatActivity {
                                 @Override
                                 public void onClick(View view) {
                                     //go to status indiv page
-                                    goToStatusIndividual(view);
+                                    goToStatusIndividual(view, pastStatus.get(0));
 
                                 }
                             });
@@ -249,16 +246,33 @@ public class StatusMain extends AppCompatActivity {
     }
 
 
-    public void goToStatusIndividual(View view) {
+    public void goToStatusIndividual(View view, HashMap<String, String> status) {
+        if(status == null||status.isEmpty()){
+            Intent intent = new Intent(this, StatusIndividual.class);
+            startActivity(intent);
+            return;
+        }
+
+
+
         Intent intent = new Intent(this, StatusIndividual.class);
 
 
+        ArrayList<String> statusList = new ArrayList<>();
+        statusList.add(status.get("postID"));
+        statusList.add(status.get("userID"));
+        statusList.add(status.get("title"));
+        statusList.add(status.get("body"));
+        statusList.add(status.get("date"));
+        statusList.add(status.get("startTime"));
+        statusList.add(status.get("hours"));
 
-//        intent.putExtra("header", "Status Header");
-//        intent.putExtra("body", "Status Body");
-        //need to pass through rest of status info to status individual activity
-        //and need to lookup on db
+
+        intent.putStringArrayListExtra("status",statusList);
+
         startActivity(intent);
+
+
     }
 
 
