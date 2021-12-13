@@ -69,6 +69,7 @@ public class ContentMainPage extends AppCompatActivity {
                                 Log.i("ContentMainPage", bar.barName);
                                 Intent intent = new Intent(ContentMainPage.this, BarInfo.class);
                                 intent.putExtra("barName", bar.barName);
+                                intent.putExtra("barID", snapshot.getKey());
                                 startActivity(intent);
                                 return;
                             } else {

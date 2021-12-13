@@ -1,38 +1,23 @@
 package com.example.bounce;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class PostStatus extends AppCompatActivity {
 
@@ -127,10 +112,7 @@ public class PostStatus extends AppCompatActivity {
     private void writeNewPost(String userID, String title, String body, String date, String startTime, String hours) {
         // Create new post at /user-posts/$userid/$postid and at
         // /posts/$postid simultaneously
-
-
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("posts");
-
 
         //METHOD FOR GETTING UNIQUE ID's
         String postID = reference.push().getKey();
@@ -142,13 +124,8 @@ public class PostStatus extends AppCompatActivity {
 
 
     public void postStatus(View view) {
-
         FirebaseUser user = mAuth.getCurrentUser();
-
         userID = user.getUid();
-
-        //TODO: Error handle for null fields
-
 
         String title = statusHeadText.getText().toString();
         String body = statusBodyText.getText().toString();
@@ -156,14 +133,15 @@ public class PostStatus extends AppCompatActivity {
         String time = startTime.getText().toString();
         String dur = duration.getText().toString();
 
-        writeNewPost(userID,title,body,date,time,dur);
-
-        Toast.makeText(PostStatus.this, "Status Posted!",
-                Toast.LENGTH_SHORT).show();
-
-        goToStatusMain(view);
+        if (title.equals("") || body.equals("") || date.equals("")
+                || time.equals("") || dur.equals("")) {
+            Toast.makeText(PostStatus.this, "Fields cannot be left blank.",
+                    Toast.LENGTH_SHORT).show();
+        } else {
+            writeNewPost(userID, title, body, date, time, dur);
+            Toast.makeText(PostStatus.this, "Status Posted!",
+                    Toast.LENGTH_SHORT).show();
+            goToStatusMain(view);
+        }
     }
-
-
-
 }

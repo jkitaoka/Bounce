@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -126,8 +125,6 @@ public class BarSideMain extends AppCompatActivity {
                                 if(!currTime.after(endDate) && !currTime.before(startDate)){
                                     activeStatus.add(statusObjs.get(i));
                                 }
-
-
                             } catch (ParseException e) {
                                 e.printStackTrace();
                             }
@@ -149,9 +146,6 @@ public class BarSideMain extends AppCompatActivity {
                     public void onCancelled(DatabaseError databaseError) {
                     }
                 });
-
-
-
     }
 
 
